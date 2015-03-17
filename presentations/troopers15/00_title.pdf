@@ -1,0 +1,79 @@
+%PDF-1.5
+%μῦ
+
+1 0 obj
+<</Pages 2 0 R/Type/Catalog>>
+endobj
+
+2 0 obj
+<</Kids[3 0 R]/Type/Pages/Count 1>>
+endobj
+
+3 0 obj
+<</Parent 2 0 R/MediaBox[0 0 960 720]/Resources<</XObject<</Fm0 5 0 R>>/Font 6 0 R>>/Contents 4 0 R/Type/Page>>
+endobj
+
+4 0 obj
+<</Length 484>>
+stream
+q
+1 0.7 -0.7 1 80 20 cm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%watermarks can be removed
+/Fm0 Do
+Q
+
+BT
+  /Arial 150 Tf 150 TL
+  0.6 g
+  170 600 Td
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% text can be directly edited
+  (Zdvanced)'
+  /ArialBold 160 Tf 150 TL
+  0 g
+  -70 -60 Td
+  (PDF tricks)'
+ET
+0 1 0 rg
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+500 243 380 077 re
+% (badly executed) censorship can be removed
+f
+endstream
+endobj
+
+5 0 obj
+<</BBox[0 0 900 160]/Resources<</Font 6 0 R>>/Subtype/Form/Length 57>>
+stream
+BT
+/ArialBold 170 Tf
+1 .8 .8 rg
+0 0 Td
+(watermark) Tj
+ET
+endstream
+endobj
+
+6 0 obj
+<</Arial<</BaseFont/Arial/Subtype/Type1/Type/Font>>/ArialBold<</BaseFont/Arial,Bold/Subtype/Type1/Type/Font>>>>
+endobj
+
+xref
+0 7
+0000000000 65536 f 
+0000000017 00000 n 
+0000000063 00000 n 
+0000000115 00000 n 
+0000000243 00000 n 
+0000000776 00000 n 
+0000000937 00000 n 
+
+trailer
+<</Size 7/Root 1 0 R>>
+
+startxref
+1065
+%%EOF
