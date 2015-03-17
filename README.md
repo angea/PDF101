@@ -1,4 +1,4 @@
-# Advanced-PDF-Tricks
+# Learn and Play with PDF Source Code
 
 This repository (for now) is development home to some hand-crafted PDF files.
 These PDFs should serve as study material for everybody who wants to learn about this format.
