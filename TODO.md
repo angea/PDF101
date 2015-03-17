@@ -24,10 +24,15 @@
 - TODO: fillable forms in a PDF
 - TODO: bookmarks in a PDF
 - TODO: annotations in a PDF
-- TODO: some sort of challenge/riddle for TROOPERS in a PDF ?
 - TODO: redaction (good + bad)
 
 &nbsp;
+
+- TODO: different ways to show "text" on page    
+  SEE: `004_text_display.pdf`
+
+- TODO: some sort of challenge/riddle for TROOPERS in a PDF ?    
+  SEE: `115_little-riddle.pdf`
 
 - DONE: incrementally updated PDF file    
   SEE: `114_incrementally-updated.pdf`
@@ -45,7 +50,7 @@
   SEE: `106_hello-troopers.pdf`    
   SEE: `108_text-rendering-modes.pdf`    
   SEE: `112_play-with-tounicodetable.pdf`    
-  SEE: `112_stegano-with-tounicodetable.pdf`
+  SEE: `113_stegano-with-tounicodetable.pdf`
 
 - TODO: CTM demo + playground     
   SEE: `105_transformation-matrix.pdf`     
