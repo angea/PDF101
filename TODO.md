@@ -28,10 +28,10 @@
 
 &nbsp;
 
-- TODO: different ways to show "text" on page    
+- DONE: different ways to show "text" on page    
   SEE: `004_text_display.pdf`
 
-- TODO: some sort of challenge/riddle for TROOPERS in a PDF ?    
+- DONE: some sort of challenge/riddle for TROOPERS in a PDF ?    
   SEE: `115_little-riddle.pdf`
 
 - DONE: incrementally updated PDF file    
@@ -52,6 +52,6 @@
   SEE: `112_play-with-tounicodetable.pdf`    
   SEE: `113_stegano-with-tounicodetable.pdf`
 
-- TODO: CTM demo + playground     
+- DONE: CTM demo + playground     
   SEE: `105_transformation-matrix.pdf`     
   SEE: `111_current-transformation-matrix-ctm.pdf`
