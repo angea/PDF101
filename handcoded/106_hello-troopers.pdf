@@ -1,0 +1,230 @@
+%PDF-1.1
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                                                        %
+% Hand-coded PDF source code file for self-studying the effects of PDF operators.                        %
+% Purpose: learn about RGB colors and about the transformation matrix operator `cm`.                     %
+%                                                                                                        %
+% (c) Copyright 2015, <kurt.pfeifle@mykolab.com>                                                         %
+% License "CC-BY-NC-SA v4.0" http://creativecommons.org/licenses/by-nc-sa/4.0/                           %
+%                                                                                                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                                                        %
+%  File features:                                                                                        %
+%  ==============                                                                                        %
+%                                                                                                        %
+%     - 1 page PDF showing text                                                                          %
+%     - text is in different colors and positions                                                        %
+%     - text is also influenced by different transformation matrices                                     %
+%     - code can easily edited by *overwriting* without influencing the `xref` table's validity          %
+%                                                                                                        %
+%                                                                                                        %
+%  Suggested excercises:                                                                                 %
+%  =====================                                                                                 %
+%                                                                                                        %
+%     - What do you need to change in order to make the PDF page a standard "A4" size?                   %
+%     - What happens if you change the PDF page size to a standard "Letter" size?                        %
+%     - Can you make one of the colors also "magenta", "cyan" or "yellow"?                               %
+%     - How do you make the text color "white"?                                                          %
+%     - Can you still somehow discover white text if the PDF is rendered in the viewer?                  %
+%     - Can you figure out which specific effect each of the 6 operands of the `cm` operators has?       %
+%     - Play around with a few of the operand values of the `cm` operator.                               %
+%     - Play around with a few of the operand values of the `g`, `G`, `rg` and `RG` operators.           %
+%     - Can you extract the text from the PDF using the `pdftotext` utility?                             %
+%     - Does the result look good?                                                                       %
+%     - Are you aware you can use the `-layout` option to above command? Does it work better now?        %
+%                                                                                                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+1 0 obj
+<</Kids[2 0 R]/Count 1/Type/Pages>>
+endobj
+
+2 0 obj
+<</Parent 1 0 R/Resources 3 0 R/MediaBox[0 0 500 870]/Contents[4 0 R]/Type/Page>>
+endobj
+
+3 0 obj
+<</Font<</F1<</Type/Font/Subtype/Type1/BaseFont/Times-Italic>> >> >>
+endobj
+
+4 0 obj
+<</Length 20064>>
+stream
+%%%%%%%%%%%%%%%% Preliminaries...  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% q .98628 .07510 -.07510 .98628 0 0 cm                                                                                           %
+  0.1 w                                   % set line width to 0.1 pt                                                              %
+  7 Tr                                    % set text rendering mode to 7 (add text to path to clipping)                           %
+  6 Tr                                    % set text rendering mode to 6 (fill first, then stroke text and add path to clipping)  %
+  5 Tr                                    % set text rendering mode to 5 (stroke text and add path to clipping)                   %
+  4 Tr                                    % set text rendering mode to 4 (fill text and add path to clipping)                     %
+  3 Tr                                    % set text rendering mode to 3 (neither fill, nor stroke text -- invisible!)            %
+  2 Tr                                    % set text rendering mode to 2 (fill first, then stroke text)                           %
+  1 Tr                                    % set text rendering mode to 1 (stroke text)                                            %
+  0 Tr                                    % set text rendering mode to 0 (fill text)                                              %
+                                          % (above lines set `Tr` to 7 different modes -- only last setting prevails!)            %
+%%%%%%%%%%%%%%%% Black %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+q                                         % save the current graphics state                                                       %
+  0.1 g                                   % set the gray color level for non-stroking operations (very dark gray)                 %
+  0.1 G                                   % set the gray color level for stroking operations (very dark gray)                     %
+   1    0    0    1    60    780    cm    % concatenate matrix to current transformation matrix                                   %
+BT                                        % begin of text operations                                                              %
+  /F1 48 Tf                               % set font to 48 points of /F1 (which is "Times-Italic" according to object 3)          %
+  (Hello, TROOPERS!)Tj                    % show the text string "Hello, TROOPERS!"                                               %
+ET                                        % end of text operations                                                                %
+Q                                         % restore the previously saved graphics state                                           %
+                                                                                                                                  %
+q                                         % save the current graphics state                                                       %
+  0.7 g                                   % set the gray color level for non-stroking operations (light gray)                     %
+  0.7 G                                   % set the gray color level for stroking operations (light gray)                         %
+   1    0    0   -1    60    778    cm    % concatenate matrix to current transformation matrix                                   %
+BT                                        % begin of text operations                                                              %
+  /F1 48 Tf                               % set font to 48 points of /F1 (which is "Times-Italic" according to object 3)          %
+  (Hello, TROOPERS!)Tj                    % show the text string "Hello, TROOPERS!" (but the previous `cm` operator distorts it)  %
+ET                                        % end of text operations                                                                %
+Q                                         % restore the previously saved graphics state                                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                                                                                                  %
+%%%%%%%%%%%%%%%% Red   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+q                                         % save the current graphics state                                                       %
+  1.0  0.0  0.0  rg                       % set the RGB color value for non-stroking operations (red)                             %
+  1.0  0.0  0.0  RG                       % set the RGB color value for stroking operations (red)                                 %
+   1    0    0    1    60    680    cm    % concatenate matrix to current transformation matrix                                   %
+BT                                        % begin of text operations                                                              %
+  /F1 48 Tf                               % set font to 48 points of /F1 (which is "Times-Italic" according to object 3)          %
+  (Hello, TROOPERS!)Tj                    % show the text string "Hello, TROOPERS!"                                               %
+ET                                        % end of text operations                                                                %
+Q                                         % restore the previously saved graphics state                                           %
+                                                                                                                                  %
+q                                         % save the current graphics state                                                       %
+  1.0  0.7  0.7  rg                       % set the RGB color value for non-stroking operations (light red)                       %
+  1.0  0.7  0.7  RG                       % set the RGB color value for stroking operations (light red)                           %
+  -1    0    0   -1   433    678    cm    % concatenate matrix to current transformation matrix                                   %
+BT                                        % begin of text operations                                                              %
+  /F1 48 Tf                               % set font to 48 points of /F1 (which is "Times-Italic" according to object 3)          %
+  (Hello, TROOPERS!)Tj                    % show the text string "Hello, TROOPERS!" (but the previous `cm` operator distorts it)  %
+ET                                        % end of text operations                                                                %
+Q                                         % restore the previously saved graphics state                                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                                                                                                  %
+%%%%%%%%%%%%%%%% Green %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+q                                         % save the current graphics state                                                       %
+  0.0  1.0  0.0  rg                       % set the RGB color value for non-stroking operations (green)                           %
+  0.0  1.0  0.0  RG                       % set the RGB color value for stroking operations (green)                               %
+   1    0    0    1    60    580    cm    % concatenate matrix to current transformation matrix                                   %
+BT                                        % begin of text operations                                                              %
+  /F1 48 Tf                               % set font to 48 points of /F1 (which is "Times-Italic" according to object 3)          %
+  (Hello, TROOPERS!)Tj                    % show the text string "Hello, TROOPERS!"                                               %
+ET                                        % end of text operations                                                                %
+Q                                         % restore the previously saved graphics state                                           %
+                                                                                                                                  %
+q                                         % save the current graphics state                                                       %
+  0.7  1.0  0.7  rg                       % set the RGB color value for non-stroking operations (light green)                     %
+  0.7  1.0  0.7  RG                       % set the RGB color value for stroking operations (light green)                         %
+  -1    0    0    1   433    544    cm    % concatenate matrix to current transformation matrix                                   %
+BT                                        % begin of text operations                                                              %
+  /F1 48 Tf                               % set font to 48 points of /F1 (which is "Times-Italic" according to object 3)          %
+  (Hello, TROOPERS!)Tj                    % show the text string "Hello, TROOPERS!" (but the previous `cm` operator distorts it)  %
+ET                                        % end of text operations                                                                %
+Q                                         % restore the previously saved graphics state                                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                                                                                                  %
+%%%%%%%%%%%%%%%% Blue  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+q                                         % save the current graphics state                                                       %
+  0.0  0.0  1.0  rg                       % set the RGB color value for non-stroking operations (blue)                            %
+  0.0  0.0  1.0  RG                       % set the RGB color value for stroking operations (blue)                                %
+   1    0    0    1    60    480    cm    % concatenate matrix to current transformation matrix                                   %
+BT                                        % begin of text operations                                                              %
+  /F1 48 Tf                               % set font to 48 points of /F1 (which is "Times-Italic" according to object 3)          %
+  (Hello, TROOPERS!)Tj                    % show the text string "Hello, TROOPERS!"                                               %
+ET                                        % end of text operations                                                                %
+Q                                         % restore the previously saved graphics state                                           %
+                                                                                                                                  %
+q 3 Tr                                    % save the current graphics state                                                       %
+  1.0  1.0  1.0  rg                       % set the RGB color value for non-stroking operations (what?!?)                         %
+  1.0  1.0  1.0  RG                       % set the RGB color value for stroking operations (what?!?)                             %
+  -1    0    0    1   433    254    cm    % concatenate matrix to current transformation matrix                                   %
+BT                                        % begin of text operations                                                              %
+  /F1 48 Tf                               % set font to 48 points of /F1 (which is "Times-Italic" according to object 3)          %
+  (Hello, TROOPERS!)Tj                    % show the text string "Hello, TROOPERS!"                                               %
+ET                                        % end of text operations                                                                %
+Q                                         % restore the previously saved graphics state                                           %
+                                                                                                                                  %
+q                                         % save the current graphics state                                                       %
+  0.5  0.5  1.0  rg                       % set the RGB color value for non-stroking operations (light blue)                      %
+  0.5  0.5  1.0  RG                       % set the RGB color value for stroking operations (light blue)                          %
+   1   -1    0    1    60    444    cm    % concatenate matrix to current transformation matrix                                   %
+BT                                        % begin of text operations                                                              %
+  /F1 48 Tf                               % set font to 48 points of /F1 (which is "Times-Italic" according to object 3)          %
+  (Hello, TROOPERS!)Tj                    % show the text string "Hello, TROOPERS!" (but the previous `cm` operator distorts it)  %
+ET                                        % end of text operations                                                                %
+Q                                         % restore the previously saved graphics state                                           %
+                                                                                                                                  %
+q                                         % save the current graphics state                                                       %
+  0.7  0.7  1.0  rg                       % set the RGB color value for non-stroking operations (light blue)                      %
+  0.7  0.7  1.0  RG                       % set the RGB color value for stroking operations (light blue)                          %
+  -1   -1    0    1   433    444    cm    % concatenate matrix to current transformation matrix                                   %
+BT                                        % begin of text operations                                                              %
+  /F1 48 Tf                               % set font to 48 points of /F1 (which is "Times-Italic" according to object 3)          %
+  (Hello, TROOPERS!)Tj                    % show the text string "Hello, TROOPERS!" (but the previous `cm` operator distorts it)  %
+ET                                        % end of text operations                                                                %
+Q %Q                                      % restore the previously saved graphics state                                           %
+                                                                                                                                  %
+q 2 Tr                                    % save the current graphics state                                                       %
+  0.0  1.0  1.0  rg                       % set the RGB color value for non-stroking operations (cyan)                            %
+  0.0  0.0  0.0  RG                       % set the RGB color value for stroking operations (black)                               %
+  -1    0    0   -1   433     68    cm    % concatenate matrix to current transformation matrix                                   %
+BT                                        % begin of text operations                                                              %
+  /F1 48 Tf                               % set font to 48 points of /F1 (which is "Times-Italic" according to object 3)          %
+  (Hello, TROOPERS!)Tj                    % show the text string "Hello, TROOPERS!"                                               %
+ET                                        % end of text operations                                                                %
+Q                                         % restore the previously saved graphics state                                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                                                                                 %
+%  Space to play: add your own code (use your text editor's "overwrite" mode)                                                     %
+                                                                                                                                  %
+                                                                                                                                  %
+                                                                                                                                  %
+                                                                                                                                  %
+                                                                                                                                  %
+                                                                                                                                  %
+                                                                                                                                  %
+                                                                                                                                  %
+                                                                                                                                  %
+                                                                                                                                  %
+                                                                                                                                  %
+                                                                                                                                  %
+                                                                                                                                  %
+                                                                                                                                  %
+                                                                                                                                  %
+                                                                                                                                  %
+                                                                                                                                  %
+                                                                                                                                  %
+                                                                                                                                  %
+                                                                                                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+endstream
+endobj
+
+5 0 obj
+<</Pages 1 0 R/Type/Catalog>>
+endobj
+
+xref
+0 6
+0000000000 65535 f 
+0000003865 00000 n 
+0000003917 00000 n 
+0000004015 00000 n 
+0000004100 00000 n 
+0000024215 00000 n 
+
+trailer
+<</Root 5 0 R/Size 6>>
+% The /Info dictionary key is removed because we don't have a metadata object in this file!
+startxref
+24261
+%%EOF

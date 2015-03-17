@@ -1,0 +1,146 @@
+%PDF-1.5
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Manually coded PDF file, authored by <ange.albertini@gmail.com> & <kurt.pfeifle@mykolab.com>    %
+%                                                                                                 %
+% Copyright (c) 2015 <ange.albertini@gmail.com> & <kurt.pfeifle@mykolab.com>                      %
+%                                                                                                 %
+% License: Creative Commons "CC-BY-NC-SA" v4.0, http://creativecommons.org/licenses/by-nc-sa/4.0/ %
+%            -- please leave above lines un-changed! --                                           %
+%                                                                                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                                                 %
+% File Features:                                                                                  %
+%                * a one-page PDF, A4-sized, containing a vector drawing in "A" shape             %
+%                * looks to the human eye like text, but there is no font embedded                %
+%                * the "A" can not be copied or pasted                                            %
+%                * an OCR program should be able to recognize the "A"                             %
+%                * file does not have a "binary" marker in the second line                        %
+%                                                                                                 %
+% Suggested Exercises:                                                                            %
+%                * Find the lines in this PDF file where the drawing happens                      %
+%                * Change the color of the shape                                                  %
+%                * Modify one or several of the line segments so that the "A" changes             %
+%                * Add another line segment so that the "A" changes                               %
+%                * Remove a line segment (comment it out)                                         %
+%                * Insert a string into the '/Author', '/Creator' and '/Producer' metadata        %
+%                * Modify the matrix used by the 'cm' operator and watch the effects              %
+%                                                                                                 %
+%                                                                                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+1 0 obj
+<<
+  /Pages        3 0 R
+  /Type         /Catalog
+>>
+endobj
+
+2 0 obj
+<<
+  /Author       (   -- to be completed --    )
+  /Creator      (   -- to be completed --    )
+  /Producer     (   -- to be completed --    )
+  /CreationDate (   -- to be completed --    )
+  /ModDate      (   -- to be completed --    )
+>>
+endobj
+
+3 0 obj
+<<
+  /Count        1
+  /Kids         [ 4 0 R ]
+  /Type         /Pages
+>>
+endobj
+
+4 0 obj
+<<
+  /Contents     5 0 R
+  /MediaBox     [ 0 0 595 842 ]
+  /Parent       3 0 R
+  /Resources    <<
+                    /ProcSet    [ /PDF ]
+                >>
+  /Type         /Page
+>>
+endobj
+
+5 0 obj
+<<
+  /Length       6 0 R
+>>
+stream
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The following PDF code draws the page contents. It uses "operators" and "operands". If an opertor requires an operand, then                 %
+% the operand must *preceed* it (like in PostScript). These are the operators used in the code:                                               %
+%                                                                                                                                             %
+%  PDF operator name:    PostScript equivalent:       Comment:                                                                                %
+%  -----------------------------------------------------------------------------------------------------------------------------              %
+%                  q     gsave                        Save current graphics state                                                             %
+%                  Q     grestore                     Restore previously saved graphics state                                                 %
+%                 cm     concat                       Concatenate matrix to current transformation matrix                                     %
+%                 re     -- none --                   Append rectangle to current path                                                        %
+%                 W*     -- none --                   Set clipping path (using the "even-odd" rule)                                           %
+%                 rg     setrgbcolor                  Set RGB color for nonstroking operations                                                %
+%                  m     moveto                       Begin new subpath / move current point to coordinates                                   %
+%                  l     lineto                       Append straight line segment to current path (segment ends at coordinates)              %
+%                  f     fill                         Fill current path (using "nonzero winding number" rule)                                 %
+%                  h     closepath                    Close current subpath                                                                   %
+%                                                                                                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+q                                                   % Save the current graphic state                                                          %
+        0.10  0.00  0.00   .10  0.00  0.00  cm      % Concatenate matrix "0.1  0  0  0.1  0  0" to current transformation matrix              %
+                                                    % The matrix values above effectively "zoom" the user space by 1000%                      %
+%       0.1   0.1   0.0   0.1   -100  -300  cm      % LINE COMMENTED OUT -- alternatively use instead of above matrix (comment in/out + edit) %
+                                                    %                       (you may also use it together with the matrix from above!)        %
+    q                                               % Save current graphics state                                                             %
+        0 0 5950 8420                       re      % Append a rectangle to current path: "x=0 y=0" are coordinates of lower left  corner     %
+                                                    %                                     "x=5950 y=8420" are coord of upper right corner     %
+                                            W*      % Set clipping path using "even-odd" rule                                                 %
+                                            n       % Save the current graphics state                                                         %
+        0   0   0                           rg      % Set RGB color to "1 0 1" (for non-stroking operations)                                  %
+        3230    5900                        m       % Move to position "x=3230 y=5900""                                                       %
+        2730    5900                        l       % Append a straight line segment to current path ending at position "x=2730 y=5900"       %
+        2650    5650                        l       % Append another straight line segment...                                                 %
+        2200    5650                        l       % Append another straight line segment...                                                 %
+        2740    7080                        l       % Append another straight line segment...                                                 %
+        3230    7080                        l       % Append another straight line segment...                                                 %
+        3760    5650                        l       % Append another straight line segment...                                                 %
+        3300    5650                        l       % Append another straight line segment...                                                 %
+        3230    5900                        l       % Append another straight line segment...                                                 %
+                                            h       % Close current subpath                                                                   %
+        3130    6200                        m       % Move to position "x=3130 y=6200"                                                        %
+        2980    6700                        l       % Append another straight line segment...                                                 %
+        2820    6200                        l       % Append another straight line segment...                                                 %
+%       2500    5200                        l       % LINE COMMENTED OUT by default (would append another straight line segment -- test it!)  %
+                                            f       % Fill current path (using "nonzero winding" rule)                                        %
+    Q                                               % Restore last saved graphic state                                                        %
+Q                                                   % Restore last saved graphic state                                                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+endstream
+endobj
+
+6 0 obj
+6768
+endobj
+
+xref
+0 7
+0000000000 65535 f 
+0000002811 00000 n 
+0000002880 00000 n 
+0000003137 00000 n 
+0000003226 00000 n 
+0000003425 00000 n 
+0000010254 00000 n 
+
+trailer
+<<
+  /Info         2 0 R
+  /Root         1 0 R
+  /Size         7
+>>
+startxref
+10275
+%%EOF

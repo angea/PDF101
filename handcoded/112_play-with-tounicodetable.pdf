@@ -1,0 +1,589 @@
+%PDF-1.4
+%ø˜¢˛
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                                                         %
+% Hand-coded PDF source code file for self-studying the syntax of PDF files.                              %
+%                                                                                                         %
+% Purpose of this file: Learn some specifics about embedded fonts and also the 'ToUnicode' table.         %
+%         * A 'ToUnicode' table must be present in the PDF in order to be able to extract/copy text.      %
+%         * The '/Widths' array is there to set the 'trackings' of all glyphs in the font.                %
+%         * Embedded fonts do not need to be 'complete' -- only 'glyphs' for used characters are required.%
+%                                                                                                         %
+% (c) Copyright 2015, <kurt.pfeifle@mykolab.com>                                                          %
+% License "CC-BY-NC-SA v4.0" http://creativecommons.org/licenses/by-nc-sa/4.0/                            %
+%                                                                                                         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                                                         %
+%  File features:                                                                                         %
+%  ==============                                                                                         %
+%                                                                                                         %
+%     - embedded Helvetica font as a 'subset'                                                             %
+%     - subset includes only 22 characters                                                                %
+%     - a 'ToUnicode' table is included                                                                   %
+%     - the `/Contents` stream for page 2 is slightly obfuscated                                          %
+%                                                                                                         %
+%                                                                                                         %
+%  Suggested excercises:                                                                                  %
+%  =====================                                                                                  %
+%                                                                                                         %
+%     - What do you need to change in order to make the PDF page a standard "A4" size?                    %
+%     - How does this page render in different PDF viewers? (Try also Chrome's native PDF renderer as     %
+%       well as Firefox with PDF.js, MuPDF, Ghostscript, OSX Preview.app, Acrobat(Reader)...)             %
+%     - Why is the string "Page Number" on Page 2 red, not black?                                         %
+%     - Why is the lower part of the 'g' glyph cut off on Page 2?                                         %
+%     - See also inline proposals about what you can start playing with....                               %
+%     - Does this file help you to understand the logic of the 'ToUnicode' table?                         %
+%                                                                                                         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+1 0 obj
+<<
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  /OpenAction       [ 8 0 R /Fit ]        % This `/OpenAction` is not binding for the viewer. It merely   %
+                                          % recommends to the viewer to 'zoom to fit' the current window. %
+                                          % `3 0 R` part tells to open the page described by PDF obj 3.   %
+                                          % Which page is that for this file?!                            %
+                                          % Other possible values:                                        %
+                                          %  - [page /XYZ left top zoom] :                                %
+                                          %      display designated page so that coordinates 'left,top'   %
+                                          %      appear @ upper left corner of window & use 'zoom' factor %
+                                          %      ('page' MUST always be an indirect reference).           %
+                                          %  - [page /FitH top] :                                         %
+                                          %      display designated page so that vertical coordinate 'top'%
+                                          %      appears at top edge of window & zoom to fit page width   %
+                                          %  - [page /FitV left] :                                        %
+                                          %    ....                                                       %
+                                          %    ....                                                       %
+                                          %  - [page /FitR bottom left right top] :                       %
+                                          %    ....                                                       %
+                                          %  - [page /FitB] :                                             %
+                                          %    ....                                                       %
+                                          %  - [page /FitBH top] :                                        %
+                                          %    ....                                                       %
+                                          %  - [page /FitBV left] :                                       %
+                                          %    ....                                                       %
+                                          %    ....                                                       %
+                                                                                                          %
+  /PageLayout       /TwoColumn            % Also not binding. Recommends 'single page' viewing.           %
+                                          % Other possible values: `/OneColumn`, `/SinglePage` (default), %
+                                          % `/TwoColumnRight`, `/TwoPageLeft`, `/TwoPageRight`.           %
+  /Pages            4 0 R                                                                                 %
+  /Type             /Catalog                                                                              %
+  /ViewerPreferences <<                         %                                                         %
+                        /FitWindow      true    % ...currently not commented...                           %
+                        /HideToolbar    false   % ...currently not commented...                           %
+                        /HideMenubar    false   % ...currently not commented...                           %
+                        /HideWindowUI   false   % ...currently not commented...                           %
+                        /FitWindow      false   % ...currently not commented...                           %
+                        /CenterWindow   false   % ...currently not commented...                           %
+                        /DisplayDocTitle true   % ...currently not commented...                           %
+                        /NonFullScreenPageMode  /UseThumbs  %                                             %
+                        /Direction      /L2R    % "left 2 right"; alternative: `/R2L`                     %
+                        /ViewArea       /MediaBox   % default is `/CropBox`...                            %
+                        % .... many more options possible ...                                             %
+                     >>                                                                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+>>
+endobj
+
+2 0 obj
+<<
+  /Author           (                               -- empty, edit --                                   ) %
+  /CreationDate     (D:20150201000000+01'00')                                                             %
+  /Creator          (                               -- empty, edit --                                   ) %
+  /CustomKey1       (                               -- empty, edit --                                   ) %
+  /CustomKey2       (                               -- empty, edit --                                   ) %
+  /Keywords         (                               -- empty, edit --                                   ) %
+  /ModDate          (D:20150201000000+01'00')                                                             %
+  /Producer         (                               -- empty, edit --                                   ) %
+  /Subject          (                               -- empty, edit --                                   ) %
+  /Title            (                               -- empty, edit --                                   ) %
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% /Author           (<kurt.pfeifle@mykolab.com>)                                                          %
+% /CreationDate     (D:20150201000000+01'00')                                                             %
+% /Creator          (Kurt Pfeifle \(@pdfkungfoo\))                                                        %
+% /CustomKey1       (Dummy entry number 1)                                                                %
+% /CustomKey2       (Dummy entry number 2)                                                                %
+% /Keywords         (PDF with text, without embedded fonts)                                               %
+% /ModDate          (D:20150102000000+01'00')                                                             %
+% /Producer         (Text editor + PDF specification + brainz + some file format experience)              %
+% /Subject          (Teaching PDF syntax with "living" examples; here: 'ToUnicode' tables)                %
+% /Title            (Hand-written PDF file: text-only content, font embedded, text extractable)           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+>>
+endobj
+
+3 0 obj
+<<
+  /Contents         5 0 R
+  /MediaBox         [ 0 0 595 420 ]
+  /Parent           4 0 R
+  /Resources        7 0 R
+  /Type             /Page
+>>
+endobj
+
+4 0 obj
+<<
+  /Count            2
+  /Kids             [
+                      3 0 R
+                      8 0 R
+                    ]
+  /MediaBox         [ 0 0 595 420 ]
+  /Resources        7 0 R
+  /Type             /Pages
+>>
+endobj
+
+5 0 obj
+<<
+  /Length 6 0 R
+>>
+stream
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Content Stream %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+0.1                                 w                   %                                         %
+                                                        %                                         %
+q                                                       %                                         %
+         0 0   595   420            re                  %                                         %
+                                    W*                  %                                         %
+                                    n                   %                                         %
+        0 0 0                       RG                  %                                         %
+q                                                       %                                         %
+        0 0 0                       rg                  %                                         %
+BT                                                      %                                         %
+        57   326                    Td                  % Can you change the position of the text?%
+        /F1 48                      Tf                  % Can you change the font size?           %
+        [<01020303040506> 17   <070809090a0b080c0d>]TJ  % How does this work? Change '17' to '-99'%
+%       (Hello, TROOPERS!)          Tj                  % Why doesn't this work when commented in?%
+                                                        %                                         %
+ET                                                      %                                         %
+Q                                                       %                                         %
+Q                                                       %                                         %
+                                                        %                                         %
+                                                        %                                         %
+q       0 55   595   16             re                  %                                         %
+                                    W*                  %                                         %
+                                    n                   %                                         %
+        0 0 1                       RG                  %                                         %
+q                                                       %                                         %
+        1 0 0                       rg                  %                                         %
+BT                                                      %                                         %
+        57   59                     Td                  %                                         %
+        /F1 16                      Tf                  %                                         %
+        [(\n)-2<0e0f0206>2<10>-2<1112>2<130214>2<06>]TJ %                                         %
+%       [(\n)-2<0e0f0206>2<10>-2<1112>2<130214>2<06>]TJ %                                         %
+ET                                                      %                                         %
+Q                                                       %                                         %
+                                                        %                                         %
+q                                                       %                                         %
+        0 0 0                       rg                  %                                         %
+BT                                                      %                                         %
+        160 59                      Td                  %                                         %
+        /F1 16                      Tf                  %                                         %
+        <15>Tj                                          %                                         %
+ET                                                      %                                         %
+Q                                                       %                                         %
+Q                                                       %                                         %
+                                                        %                                         %
+                                                        %                                         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+endstream
+endobj
+
+6 0 obj
+4700
+endobj
+
+7 0 obj
+<<
+  /Font             11 0 R
+  /ProcSet          [ /PDF /Text ]
+>>
+endobj
+
+8 0 obj
+<<
+  /Contents         16 0 R
+  /MediaBox         [ 0 0 595 420 ]
+  /Parent           4 0 R
+  /Resources        7 0 R
+  /Type             /Page
+>>
+endobj
+
+9 0 obj
+<<
+% empty object
+>>
+endobj
+
+10 0 obj
+<<
+% empty object
+>>
+endobj
+
+11 0 obj
+<<
+  /F1               18 0 R
+>>
+endobj
+
+12 0 obj
+<<
+% empty object
+>>
+endobj
+
+13 0 obj
+0
+endobj
+
+14 0 obj
+% empty object
+endobj
+
+15 0 obj
+0
+endobj
+
+16 0 obj
+<<
+  /Length       17 0 R
+>>
+stream
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Content Stream, slightly obfuscated... %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+0.1 w q 0 0 595 420 re W* n 0 0 0 RG q 0 0 0 rg BT 57 326 Td /F1 48 Tf                            %
+[<01020303040506>17<070809090a0b080c0d>]TJ ET Q Q q 0 57 595 13 re W* n 0 0 0 RG q 0 0 0 rg       %
+BT 57 59 Td /F1 16 Tf[(\n)-2<0e0f0206>2<10>-2<1112>2<130214>2<06>]TJ ET Q q 0 0 0 rg BT           %
+160 59 Td /F1 16 Tf<16>Tj ET Q Q                                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+endstream
+endobj
+
+17 0 obj
+800
+endobj
+
+18 0 obj
+% This
+<<
+  /BaseFont         /BZAAAA+Helvetica   % Change fontname here. Does the PDF still work afterwards?
+  /FontDescriptor   19 0 R              %
+  /FirstChar        0                   % Change value to '1', '2', '3',... -- What happens to the PDF?
+  /LastChar         21                  %
+  /Type             /Font
+  /Subtype          /TrueType           %
+  /ToUnicode        20 0 R              % Comment out this line. Can you then still copy'n' paste text from PDF?
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  The array below defines the width of characters contained in embedded font  %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  /Widths           [                                                                             %
+                        633  % comment out this line, see what happens. Change value...           %
+                        722  % 'H' : change value or comment out, see what happens.....           %
+                        556  % 'e' : change value or comment out. See what happens.....           %
+                        222  % 'l' : change value or comment out. See what happens.....           %
+                        556  % 'o' : change value or comment out. See what happens.....           %
+                        277  % ',' : change value or comment out. See what happens.....           %
+                        277  % ' ' : change value or comment out, see what happens.....           %
+                        610  % 'T' : change value or comment out. See what happens.....           %
+                        722  % 'R' : change value or comment out. See what happens.....           %
+                        777  % 'O' : change value or comment out. See what happens.....           %
+                        666  % 'P' : change value or comment out. See what happens.....           %
+                        666  % 'E' : change value or comment out, see what happens.....           %
+                        666  % 'S' : change value or comment out. See what happens.....           %
+                        277  % '!' : change value or comment out. See what happens.....           %
+                        556  % 'a' : change value or comment out. See what happens.....           %
+                        556  % 'g' : change value or comment out. See what happens.....           %
+                        722  % 'N' : change value or comment out, see what happens.....           %
+                        556  % 'u' : change value or comment out. See what happens.....           %
+                        833  % 'm' : change value or comment out. See what happens.....           %
+                        556  % 'b' : change value or comment out. See what happens.....           %
+                        333  % 'r' : change value or comment out. See what happens.....           %
+                        556  % '1' : change value or comment out. See what happens.....           %
+                        556  % '2' : change value or comment out. See what happens.....           %
+                    ]                                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+>>
+endobj
+
+19 0 obj
+<<
+  /Ascent           770
+  /CapHeight        1121
+  /Descent          -229
+  /Flags            4
+  /FontBBox         [
+                        -950
+                        -480
+                        1445
+                        1122
+                    ]
+  /FontFile2        22 0 R
+  /FontName         /BAAAAA+Helvetica
+  /ItalicAngle      0
+  /StemV            80
+  /Type             /FontDescriptor
+>>
+endobj
+
+20 0 obj
+<<
+  /Length           21 0 R
+>>
+stream
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% This is the "ToUnicode" table %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  The purpose of this table is:                                                                  %
+%    - Serve as a "lookup" resource how a specific "character" maps to a "glyph"                  %
+%    - This table is valid for font '/BAAAAA+Helvetica' (which is found as '/F1' in this PDF)     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+/CIDInit/ProcSet findresource begin           %                                                   %
+12 dict begin                                 %          Permutation table                        %
+begincmap                                     %          (used by 'alternative' ToUnicode below)  %
+/CIDSystemInfo                                %          =======================================  %
+              <<                              %            e  -> a                                %
+                   /Registry    (Adobe)       %            a  -> u                                %
+                   /Ordering    (UCS)         %            u  -> e                                %
+                   /Supplement  0             %            2 <-> 1                                %
+              >> def                          %            P <-> N                                %
+/CMapName/Adobe-Identity-UCS def              %            b  -> m                                %
+/CMapType 2 def                               %            m  -> g                                %
+1 begincodespacerange                         %            g  -> r                                %
+<00> <FF>                                     %            r  -> b                                %
+endcodespacerange                             %                                                   %
+22 beginbfchar                                %                                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%% "Correct display, wrong copy'n' paste" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     <01> <0048>                             % char <01> is for hex <0048> which is 'H' in ASCII %
+%     <02> <0061>                             % char <02> is for hex <0065> which is 'e' in ASCII %
+%     <03> <006C>                             % char <03> is for hex <006C> which is 'l' in ASCII %
+%     <04> <006F>                             % char <04> is for hex <006F> which is 'o' in ASCII %
+%     <05> <002C>                             % char <05> is for hex <00C2> which is ',' in ASCII %
+%     <06> <0020>                             % char <06> is for hex <0020> which is ' ' in ASCII %
+%     <07> <0054>                             % char <07> is for hex <0054> which is 'T' in ASCII %
+%     <08> <0052>                             % char <08> is for hex <0052> which is 'R' in ASCII %
+%     <09> <004F>                             % char <09> is for hex <004F> which is 'O' in ASCII %
+%     <0A> <0050>                             % char <0A> is for hex <0050> which is 'P' in ASCII %
+%     <0B> <0045>                             % char <0B> is for hex <0045> which is 'E' in ASCII %
+%     <0C> <0053>                             % char <0C> is for hex <0053> which is 'S' in ASCII %
+%     <0D> <0021>                             % char <0D> is for hex <0021> which is '!' in ASCII %
+%     <0E> <0075>                             % char <0E> is for hex <0061> which is 'a' in ASCII %
+%     <0F> <0072>                             % char <0F> is for hex <0067> which is 'g' in ASCII %
+%     <10> <004E>                             % char <10> is for hex <004E> which is 'N' in ASCII %
+%     <11> <0065>                             % char <11> is for hex <0075> which is 'u' in ASCII %
+%     <12> <0067>                             % char <12> is for hex <006D> which is 'm' in ASCII %
+%     <13> <006D>                             % char <13> is for hex <0062> which is 'b' in ASCII %
+%     <14> <0062>                             % char <14> is for hex <0072> which is 'r' in ASCII %
+%     <15> <0032>                             % char <15> is for hex <0031> which is '1' in ASCII %
+%     <16> <0031>                             % char <16> is for hex <0032> which is '2' in ASCII %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%% "Correct display, correct copy'n' paste" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      <01> <0048>                             % char <01> is for hex <0048> which is 'H' in ASCII %
+      <02> <0065>                             % char <02> is for hex <0065> which is 'e' in ASCII %
+      <03> <006C>                             % char <03> is for hex <006C> which is 'l' in ASCII %
+      <04> <006F>                             % char <04> is for hex <006F> which is 'o' in ASCII %
+      <05> <002C>                             % char <05> is for hex <00C2> which is ',' in ASCII %
+      <06> <0020>                             % char <06> is for hex <0020> which is ' ' in ASCII %
+      <07> <0054>                             % char <07> is for hex <0054> which is 'T' in ASCII %
+      <08> <0052>                             % char <08> is for hex <0052> which is 'R' in ASCII %
+      <09> <004F>                             % char <09> is for hex <004F> which is 'O' in ASCII %
+      <0A> <0050>                             % char <0A> is for hex <0050> which is 'P' in ASCII %
+      <0B> <0045>                             % char <0B> is for hex <0045> which is 'E' in ASCII %
+      <0C> <0053>                             % char <0C> is for hex <0053> which is 'S' in ASCII %
+      <0D> <0021>                             % char <0D> is for hex <0021> which is '!' in ASCII %
+      <0E> <0061>                             % char <0E> is for hex <0061> which is 'a' in ASCII %
+      <0F> <0067>                             % char <0F> is for hex <0067> which is 'g' in ASCII %
+      <10> <004E>                             % char <10> is for hex <004E> which is 'N' in ASCII %
+      <11> <0075>                             % char <11> is for hex <0075> which is 'u' in ASCII %
+      <12> <006D>                             % char <12> is for hex <006D> which is 'm' in ASCII %
+      <13> <0062>                             % char <13> is for hex <0062> which is 'b' in ASCII %
+      <14> <0072>                             % char <14> is for hex <0072> which is 'r' in ASCII %
+      <15> <0031>                             % char <15> is for hex <0031> which is '1' in ASCII %
+      <16> <0032>                             % char <16> is for hex <0032> which is '2' in ASCII %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%% "Correct display, copy'n'paste all `H`" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     <01> <0048>                             % char <01> is for hex <0048> which is 'H' in ASCII %
+%     <02> <0048>                             % char <02> is for hex <0048> which is 'H' in ASCII %
+%     <03> <0048>                             % char <03> is for hex <0048> which is 'H' in ASCII %
+%     <04> <0048>                             % char <04> is for hex <0048> which is 'H' in ASCII %
+%     <05> <0048>                             % char <05> is for hex <0048> which is 'H' in ASCII %
+%     <06> <0048>                             % char <06> is for hex <0048> which is 'H' in ASCII %
+%     <07> <0048>                             % char <07> is for hex <0048> which is 'H' in ASCII %
+%     <08> <0048>                             % char <08> is for hex <0048> which is 'H' in ASCII %
+%     <09> <0048>                             % char <09> is for hex <0048> which is 'H' in ASCII %
+%     <0A> <0048>                             % char <0A> is for hex <0048> which is 'H' in ASCII %
+%     <0B> <0048>                             % char <0B> is for hex <0048> which is 'H' in ASCII %
+%     <0C> <0048>                             % char <0C> is for hex <0048> which is 'H' in ASCII %
+%     <0D> <0048>                             % char <0D> is for hex <0048> which is 'H' in ASCII %
+%     <0E> <0048>                             % char <0E> is for hex <0048> which is 'H' in ASCII %
+%     <0F> <0048>                             % char <0F> is for hex <0048> which is 'H' in ASCII %
+%     <10> <0048>                             % char <10> is for hex <0048> which is 'H' in ASCII %
+%     <11> <0048>                             % char <11> is for hex <0048> which is 'H' in ASCII %
+%     <12> <0048>                             % char <12> is for hex <0048> which is 'H' in ASCII %
+%     <13> <0048>                             % char <13> is for hex <0048> which is 'H' in ASCII %
+%     <14> <0048>                             % char <14> is for hex <0048> which is 'H' in ASCII %
+%     <15> <0048>                             % char <15> is for hex <0048> which is 'H' in ASCII %
+%     <16> <0048>                             % char <16> is for hex <0048> which is 'H' in ASCII %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+endbfchar                                     %                                                   %
+endcmap                                       %                                                   %
+CMapName currentdict /CMap defineresource pop %                                                   %
+end                                           %                                                   %
+end                                           %                                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This is a cheatsheet to look up HEX -> ASCII code translations:                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% kp@mbp:~>  ascii -x                                                                             %
+%    0 NUL    10 DLE    20      30 0    40 @    50 P    60 `    70 p                              %
+%    1 SOH    11 DC1    21 !    31 1    41 A    51 Q    61 a    71 q                              %
+%    2 STX    12 DC2    22 "    32 2    42 B    52 R    62 b    72 r                              %
+%    3 ETX    13 DC3    23 #    33 3    43 C    53 S    63 c    73 s                              %
+%    4 EOT    14 DC4    24 $    34 4    44 D    54 T    64 d    74 t                              %
+%    5 ENQ    15 NAK    25 %    35 5    45 E    55 U    65 e    75 u                              %
+%    6 ACK    16 SYN    26 &    36 6    46 F    56 V    66 f    76 v                              %
+%    7 BEL    17 ETB    27 '    37 7    47 G    57 W    67 g    77 w                              %
+%    8 BS     18 CAN    28 (    38 8    48 H    58 X    68 h    78 x                              %
+%    9 HT     19 EM     29 )    39 9    49 I    59 Y    69 i    79 y                              %
+%    A LF     1A SUB    2A *    3A :    4A J    5A Z    6A j    7A z                              %
+%    B VT     1B ESC    2B +    3B ;    4B K    5B [    6B k    7B {                              %
+%    C FF     1C FS     2C ,    3C <    4C L    5C \    6C l    7C |                              %
+%    D CR     1D GS     2D -    3D =    4D M    5D ]    6D m    7D }                              %
+%    E SO     1E RS     2E .    3E >    4E N    5E ^    6E n    7E ~                              %
+%    F SI     1F US     2F /    3F ?    4F O    5F _    6F o    7F DEL                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+endstream
+endobj
+
+21 0 obj
+12703
+endobj
+
+22 0 obj
+<<
+  /Length1      11072
+  /Length       23 0 R
+>>
+stream
+true  Ä  @cmapU=8H   Ã  cvt ≥@Ë%  ‡  lfpgmèï*  L  
+glyfﬁ`-H  l  †head÷îƒ  !   6hhea@˛*  !D   $hmtx[
+∞X  !h   Zlocaæ4,*  !ƒ   0maxpmt  !Ù    nameÒÒS  "  <post     'P    prepxm~~  'p  œ              	
+                                                                                                                                                                                                                                           ¿ Ω (Ä /   ˇŸ  ˇ⁄  ˇŸ˛UˇÊ« ˛mˇÒ;   π   π˛?< ¿ ç õ Ø  ® ¿ ( ^ ò …j π\ ¥ ÷ . Ä  ∏ L Ãˇˇ— f § Ø t ¬ ï ±  ( m  L é%ˇz  @ L b Ñˇ¢ $ 8 Ü Ω 9 ^ é Ìˇ©ˇ≥ @ R U ™ ´ ¬ À#±ˇÆˇ‰  Q t Ñ ™ —ˇLˇØ  , B P Q Ñ æ%⁄ˇh  ; ò ú ü ° ¡ ÏÇ¥ˇhˇvˇ–ˇ·    S S }¥·ØÜˇúˇÍˇ˛  ( * R ` ì £ ™ Ø Ø ¿ Ektìï@Ç¥Ö˛˝  ) G G H o à ¥ π ƒ Ú ˘Ôt≈ˇ5ˇÛ  K L R U e v v á á é ´ ª0CP}îï”*UXwxÊN\y”s≤åò˛ıˇªˇ«ˇ’   [ r ~ ú ¬ – Ù ˙%;B^^Äõπ°πP¿–™ﬂ„Ô˚+tì´¬Œiïôﬂı>°Â%€˛b˛â˛Œˇ;ˇ·ˇ¯   ! 9 B N _ a o p 4  é ≠ ≠ Ø Ω ƒ ≈ … … … „ Ì ¯ ˘ 2MMNOfiû∫∫æ„Ôˆ  	SbmÄ’Ä*JZØØ»÷˚˚GI åmöö¶®≤œ9>NVÄâåc—÷~é≤Ô(Loå ¥ … ¿ ¡             $ Ø 2 n cDb ñC°a ä t dàÔp (ˇ]~G0 ™ æ { b ö } â\ °ˇÿ™ ◊ ì l   Ä ßB ó  Ç 0 * * * * *@)*)('&%$#"! 
+	 ,E#F` ∞&`∞&#HH-,E#F#a ∞&a∞&#HH-,E#F`∞ a ∞F`∞&#HH-,E#F#a∞ ` ∞&a∞ a∞&#HH-,E#F`∞@a ∞f`∞&#HH-,E#F#a∞@` ∞&a∞@a∞&#HH-, < <-, E# ∞ÕD# ∏ZQX# ∞çD#Y ∞ÌQX# ∞MD#Y ∞êQX# ∞D#Y!!-,  EhD ∞` E∞FvhäE`D-,π@   
+-, π  @ -, E∞ Ca}h∞ C`D-,E∞#DE∞#D-, E∞%Ead∞PQXED!!Y-, ∞%RX#Y!-,i∞@a∞ ãd#dã∏@ b`d#da\X∞aY∞`-,E∞+∞#D∞zÂ-,E∞+∞#D-,E∞+∞Eå∞#D∞zÂ-,∞%FaeäF∞@`ãH-,∞%F`äF∞@aåH-,KS \X∞ÖYX∞ÖY-, ∞%E∞#jDE∞#DEe#E ∞%`j ∞	#B#häj`a ∞ RX≤@E#aDY∞ PX≤@E#aDY-,π~;!-,π-A-A-,π;!~-,π;!ÁÉ-,π-A“¿-,π~ƒ‡-,KRXED!!Y-, ∞%#I∞@`∞ c ∞ RX#∞%8#∞%e8 äc8!!!!!Y-,Ei ∞	C∞&`∞%∞%Ia∞ÄSX≤@E#ahD≤@E#`jD≤	Ee#E`BY∞	C`ä:-,∞%# äı ∞`#ÌÏ-,∞%# äı ∞a#ÌÏ-,∞%ı ÌÏ-, ∞` < <-, ∞a < <-,vE ∞%E#ah#h`D-,vE∞%E#ah#Eh`D-,vE∞%Eah#E#aD-,Ei∞∞2KPX!∞ YaD-∏ +,K∏ 	PX±éY∏ˇÖ∏ Dπ 	 _^-∏ ,,  EiD∞`-∏ -,∏ ,*!-∏ ., F∞%FRX#Y ä äIdä F had∞%F hadRX#eäY/ ∞ SXi ∞ TX!∞@Yi ∞ TX!∞@eYY:-∏ /, F∞%FRX#äY F jad∞%F jadRX#äY/˝-∏ 0,K ∞&PXQX∞ÄD∞@DY!! E∞¿PX∞¿D!YY-∏ 1,  EiD∞`  E}iD∞`-∏ 2,∏ 1*-∏ 3,K ∞&SX∞Ä∞@Yää ∞&SX#!∞¿äää#Y ∞&SX#!∏ äää#Y ∞&SX#!∏@äää#Y ∏ &SX∞%E∏ÄPX#!∏Ä#!∞%E#!#!Y!YD-∏ 4,KSXED!!Y-∏ 5,K∏ 	PX±éY∏ˇÖ∏ Dπ 	 _^-∏ 6,  EiD∞`-∏ 7,∏ 6*!-∏ 8, F∞%FRX#Y ä äIdä F had∞%F hadRX#eäY/ ∞ SXi ∞ TX!∞@Yi ∞ TX!∞@eYY:-∏ 9, F∞%FRX#äY F jad∞%F jadRX#äY/˝-∏ :,K ∞&PXQX∞ÄD∞@DY!! E∞¿PX∞¿D!YY-∏ ;,  EiD∞`  E}iD∞`-∏ <,∏ ;*-∏ =,K ∞&SX∞Ä∞@Yää ∞&SX#!∞¿äää#Y ∞&SX#!∏ äää#Y ∞&SX#!∏@äää#Y ∏ &SX∞%E∏ÄPX#!∏Ä#!∞%E#!#!Y!YD-∏ >,KSXED!!Y-∏ ?,K∏ 	PX±éY∏ˇÖ∏ Dπ 	 _^-∏ @,  EiD∞`-∏ A,∏ @*!-∏ B, F∞%FRX#Y ä äIdä F had∞%F hadRX#eäY/ ∞ SXi ∞ TX!∞@Yi ∞ TX!∞@eYY:-∏ C, F∞%FRX#äY F jad∞%F jadRX#äY/˝-∏ D,K ∞&PXQX∞ÄD∞@DY!! E∞¿PX∞¿D!YY-∏ E,  EiD∞`  E}iD∞`-∏ F,∏ E*-∏ G,K ∞&SX∞Ä∞@Yää ∞&SX#!∞¿äää#Y ∞&SX#!∏ äää#Y ∞&SX#!∏@äää#Y ∏ &SX∞%E∏ÄPX#!∏Ä#!∞%E#!#!Y!YD-∏ H,KSXED!!Y-∏ I,K∏ 	PX±éY∏ˇÖ∏ Dπ 	 _^-∏ J,  EiD∞`-∏ K,∏ J*!-∏ L, F∞%FRX#Y ä äIdä F had∞%F hadRX#eäY/ ∞ SXi ∞ TX!∞@Yi ∞ TX!∞@eYY:-∏ M, F∞%FRX#äY F jad∞%F jadRX#äY/˝-∏ N,K ∞&PXQX∞ÄD∞@DY!! E∞¿PX∞¿D!YY-∏ O,  EiD∞`  E}iD∞`-∏ P,∏ O*-∏ Q,K ∞&SX∞Ä∞@Yää ∞&SX#!∞¿äää#Y ∞&SX#!∏ äää#Y ∞&SX#!∏@äää#Y ∏ &SX∞%E∏ÄPX#!∏Ä#!∞%E#!#!Y!YD-∏ R,KSXED!!Y-∏ S,K∏ 	PX±éY∏ˇÖ∏ Dπ 	 _^-∏ T,  EiD∞`-∏ U,∏ T*!-∏ V, F∞%FRX#Y ä äIdä F had∞%F hadRX#eäY/ ∞ SXi ∞ TX!∞@Yi ∞ TX!∞@eYY:-∏ W, F∞%FRX#äY F jad∞%F jadRX#äY/˝-∏ X,K ∞&PXQX∞ÄD∞@DY!! E∞¿PX∞¿D!YY-∏ Y,  EiD∞`  E}iD∞`-∏ Z,∏ Y*-∏ [,K ∞&SX∞@∞ Yää ∞&SX#!∞Ääää#Y ∞&SX#!∏ ¿äää#Y ∞&SX#!∏ äää#Y ∞&SX#!∏@äää#Y ∏ &SX∞%E∏ÄPX#!∏Ä#!∞%E#!#!Y!YD-∏ \,KSXED!!Y-     B  –Ω   C∏ S+∏ /∏ /∏ ∏  –∏  /∏ ∏ ‹∏  ∏ ‹∏ ∏ 	‹ ∫    V+∫   V+013!'!Bé∏¸‚Ω˙C∏M˚≥    °  /Ω  ?@!	
+%
+% †!vp++NÙ<M˝<Nˆ<M˝< ?<?<9/<˝<103!3#!#°…¸……˝…Ω˝°_˙CØ˝Q    Hˇ⁄I  $ %@yóôß@@)K∂«∆«ÿŸ	÷ÿ#ËË#««\!$ö$9!
+%óß∑◊%%
+'''$.'&'‘!¶]++NÙM˝‰NˆMÌ‘˝999999/] ??Ì?Ì9/<˝<Ì910Cy@F #&%"$&   &	& &#!&!&
+& 
+&  ++++<++<+++*+*Åq] q]] !327673#"  3&'&#"¥÷86¸ÔêóçT0±O1RyAR»˛Í‚(J≠|®#GkUQlJ¢£≈]6G;ë.P#B˛&uFÇ≥ä‹     â  =Ω  )@  
+) ™!bB++NÙ<M˝<NEeDÊ ??103#â¥¥Ω˙C    ;ˇŸ!N    ê@3òñô•®¶©∏»◊ÂÈ:'	'∏	≥!r]++NÙMÌNˆMÌ9/ ??Ì?Ì10Cy@, &	&  &	& &
+& & &&+++++++++Å ]$54'&#"3 !" 5 3‡Ö0L∫•ññ£÷¸˛˜›˛¸Át¶ñ^î¸≤´‰⁄˛Ï˛Ù˛˝˛Æ+¸@  ™˛–Ä ⁄  -@ #
+d
+4
+d ce+NÙM<˝ÌNEeDÊ ?MÌ‘Ì1067654&'#53™Em÷`v—U-*⁄ w¥     !  …Ω  4@ 	 ˚%˚å^+NÙMÙ<˝<ÙNEeDÊ ??<M˝<10!#!5…˛ ˛ΩØ˙ÚØ     ¥  xΩ 	 ' î@IHYXidxª0 @B#! &`qu!&$% 		& %%1i)&%'
+()÷!ïf++NÙ<M˝<NˆMÙÌ‘Ì‘Ì ?<<?˝9/<˝<999999]9+10]2654'&#!!2#./&'&#!#Gå£r=f˛«®®mœmbVW.Ù
+d9z˛;«píù9˛
+°1^˝Ñ®3#rÄ≈T)F!<Vıê1˝ä  Pˇ’ËÂ    ä@,á« «√»…
+C::	11ÿ!jf++NÙMÌNˆMÌ9/ ??Ì?Ì10Cy@2 &%	%&2  22 222
+2 2 ++++++++++++Å ] ! '&7! 5 #" !õªíßƒ˛ï˛≠¬≠îætÎ˛ÒÎ‰˛‡˜Â˙√˛–˛∑⁄ˇ ‡ÿJ*‘˙¢yı<˛«˛œÙ˛±^  Ø  ¯Ω 
+  a@5iiyzHXhz
+ 
+	1	% ∏≥!ïâ++NÙM˝<NˆM˝9 ??<˝<9/<˝<]10]!2#!# '&#!!265Øïƒ÷ﬁ˛2«ÄxBs˛tåÜßΩ›»¨ˇ˝ìπ:˛rê   Ø  ÌΩ   N@$ 	
+ i;	% ∏≥!ïâ++NÙM˝<NˆMÙ‰9/ ??<˝<?<Ì9/˝10!!!!!!Ø/¸ì+¸’|˚¬Ω¥˛B™˛ØΩ     `ˇ’ˆÂ / 0 ˛@^)'#&&65!G&b&zw$	k%Yh™"
+:"$"
+Ü//+::+	0
+$"(00%I%(2%I %/12†!jâ++NÙMÌÙÌNˆMÌÙÌ9/9999 ??Ì?Ì9/Ì9.˝3]q10Cy@M(. &&-%%&, + -., + *++ +-+ 	'+%.+ )+ ++ ++++++<++++<++++++ÅÅÅ ]327654'&/&'&54$32#&'&#"# '&74c˙p\≤KL¢«√Qå˚ÁCª1[⁄∞öZ;–ŒïQå˛ùÎ˛ÓõõM⁄}Ní >†x32%-,5\∑∆˛ﬂıv?sîbl2 0/";gƒÙ“åãÓ   Ì  ∏Ω  	 4@  O*	
+% 
+d!x|++NÙMƒ˝99ƒNEeDÊ M?˝Ê?103#3#ÌÀ1f4««Ω˛˝Ñ|¸ˆ–  Rˇ‹GI  ; < ›@8*0
+'3Hi	j9	2$	;+.);∑;;2*%'"∏ä@#'.5<<<)*®$>)J'8=>ºó ! πñ ++NÙMÌÙÌNˆM‰˝ƒ9/ ??Ì?Ì?ÌÌ99]9.Ì.Ì9910Cy@(67" %6! !  !!" 7! !!! +++<++++ÅÅÅ ]]$3276=67654&#"#>323267#"'&'#"&5467rN_Yñ!h2mb1S¥>Ézç;!
+®˜£Ωvu%*,&]*	7Œ|ïΩ∫óäœZ,I¶ë/gl,-\SL*S∆õHHò˝ó"ÖB#@Hjµàï§‰   =˛;ËI  - . ∑@M6II	XY	à©®©'¶+π@")ƒ
+")
+
+.....-)0'>&'/0á!rB++NÙMÌÙÌ9NˆM˝‰ı9/ ??Ì?Ì??ÌÌ9910Cy@,#($%&#&& (&& ! %"&')& !  +++<<+++++ÅÅÅ ] 53!"&'33276'#"$ 3 &#"32765|^35¶<p˛…≠Ï∑'=Éœ@&6ò}Æ˛˚∫D§æF%ì|¬O,˛—B>#Cá¸2Ãv⁄õ•H'<íV›RP˜.˛°¿≤_öµΩØcÑ-    ú  *Ω 	 
+ v@78'GX∏õ@
+
+
+∏õµ∏õ@
+	 †!vp++NÙ<M˝<Nˆ<M˝<999/ ??<?<99á.+á}≈10 ]]33##úÎÊΩﬂ˝æ:Ω˚Z¶˙C•˚[Ω    Äˇ„ﬁI   ^@:∏»	(w◊ 
+ 
+.
+))“!bB++NÙMÌNˆ<M˝‰9/ ??Ì??<9910 ]]327653#7#"'&5%80ÉºD%¥™#4gìÂS-Ø/˝9R4`®Zù˚—û=*TôRâÿ   Ñ  %G & Ö@;'''HVg#%
+#
+%! %
+()∏≤)∏@
+ .%)& '(∏≥!bB++NÙ<M˝‰ÙÌÙ˝NEeDÊ ?<??<MÌÌ99910 ]367632>32#4&#"#4'&#"#Ñ≤@4YqÄN,$<¢eÿN*ªkMjô∑)pfß¥/òO$=?$FVSúTé˝7ËkPé¶˝ëªm2Kûœ˝»   vˇﬁ%¬   p@.¶ß◊"  
+' ..)  á!Ω]++NÙ<M˝‰‰NˆMÌ ?Ì??Ì?9910Cy@
+&
+&&	& ++++ÅÅ ]3>32#"'&'#$654&#"3vØ;§`»˘ˆ⁄zT29¶fëëç{π&G¬¬˝ÎMQ˛Ì˛Ù˛˛∞;#Mâ}Ëæ©ﬁ∂—ó^±    â  íG  O@&'&7G		' 
+.) ∏E≥!b~++NÙ<M˝‰NÊ ??M?ƒ˝ƒ99910 ]3>32.#"#â´§kàí¥/π6õæØr˝ò   ƒ  ’í  #±∏3@ñ 
+G	vƒƒ’˝9 ??ÙÕ105>73#ƒ√ö&é¿ˆäY¶˙nˆ    @  ù " ¶@N6FWknzÑá*Zk||µ "! "
+5 u!"!8o"'Å8"$G#vƒ‘ÌÙÌıÌ‰ ?<˝<?Ì9/999999 ]10Cy@%&( 	(
+(
+( ++++++Å ]6?67654&#"#676!2!!JÖ¡¿Å4Rñ}πG&∑Bu(ˆ„yFµâb8d¸)πpoK5Sk}ìåKÖªv–˛ˆ£¨zGeL61Wj™         ™Û√_<ı      _Mè           ˛;%Â   	          )˛)                           B« °s H« âs ;9 ™9  „ !« ¥9 PV ØV ØV `9 Ìs Rs =« ús Ä™ Ñs v™ âs ƒ @     6 n8Z“2º:ê‘†–öBòÚnÿD–     =         ]  Ë
+     '⁄                P        	 b        k        r       	 ê        ô       	 †       2 ©       	 €       	 ‰       Ì       ˝                  /1      <`      0ú      :Ã      6      0<      <l    ®    Æ    º  	  »    ÷    Ê    Ú    
+            "    .    :    H    T    Z  
+   b N o   C h a n g e© 1990-2006 Apple Computer Inc. © 1981 Linotype AG © 1990-91 Type Solutions Inc.HelveticaRegularHelvetica; 9.0d3e2; 2013-05-15Helvetica9.0d3e2HelveticaHelvetica is a registered trademark of Linotype AGHelveticaLigaturesCommon LigaturesNumber SpacingProportional NumbersMonospaced NumbersHelvetica est une marque déposée de Linotype AGHelvetica ist ein eingetragenes Warenzeichen der Linotype AGHelvetica è un marchio registrato di Linotype AGHelvetica is een geregistreerd handelsmerk van Linotype AGHelvetica är ett registrerat varumärke för Linotype AGHelvetica es una marca registrada de Linotype AGHelvetica er et registreret varemærke tilhørende Linotype AGjnñö‘ O r d i n Ê r N o r m a l R e g u l a r N o r m a a l i N o r m a l R e g o l a r e0Ï0Æ0Â0È0¸«|ºÃ¥ R e g u l i e r N o r m a l N o r m a l1KG=K9 N o r m a l^8âƒOS9'/J                               ∏ S+∏ I+∏ ?+∏ 5+∏ ++A Ä¶ ê¶ †¶  iã yã âã ôã  âã ôã ©ã πã≤@∫y J@T
+“∏¥ûŸ„ª  ·≤ 	A
+†ü d • %z H (ö≥)l`A
+© p© Ä©  Ä© ©≤2æ, % & ∂Á1-Â1∏≤¬'∏≤¡∏@¿ûøgæg´'∏≤™)∏∂©lì∏ö≤í∏≤ë∏≤u∏∂m)ñd1∏ö≤Lñ∏´≤9∏V@68!5‰/'∏@-L*1Õ$∏´≤ ∏%@ì:LE':E'ª™õ *õ≤%J∫õ %z≥I)8ñ∏{≥H(1%∏z@6H(ñ)H'%)L%)F'')H'V»Ñ[A2+(&!
+∏¨≤?ª´ ? ´≥∏Æ≤?ª≠ ? ≠∑ ∏ˇ‡¥   ∏´¥   ∏´∂   ∏≠≥   ∏≠@               J ∞ç∏ Öv??>9FD>9FD>9FD>9FD>9FD>9F`D>9F`D>9F`D+++++++++++++++++++++++++++∞ñKSX∞™Y∞2KSX∞ˇY+++++++++++++++++++++++++++++++++++++++++tu+++eB++KRy≥vpjfEe#E`#Ee`#E`∞ãvh∞Äb  ±jpEe#E ∞&`bch ∞&ae∞p#eD∞j#D ±vfEe#E ∞&`bch ∞&ae∞f#eD∞v#D± fETX±f@eD≤v@vE#aDY≥bBr]Ee#E`#Ee`#E`∞âvh∞Äb  ±rBEe#E ∞&`bch ∞&ae∞B#eD∞r#D ±b]Ee#E ∞&`bch ∞&ae∞]#eD∞b#D± ]ETX±]@eD≤b@bE#aDY++++EiSBst∏ö EiK ∞(S∞IQZX∞ aYD∏¶ EiDu 
+endstream
+endobj
+
+23 0 obj
+11072
+endobj
+
+xref
+0 24
+0000000000 65535 f 
+0000003906 00000 n 
+0000008788 00000 n 
+0000011187 00000 n 
+0000011349 00000 n 
+0000011582 00000 n 
+0000016337 00000 n 
+0000016358 00000 n 
+0000016442 00000 n 
+0000016605 00000 n 
+0000016642 00000 n 
+0000016680 00000 n 
+0000016730 00000 n 
+0000016768 00000 n 
+0000016787 00000 n 
+0000016819 00000 n 
+0000016838 00000 n 
+0000017701 00000 n 
+0000017722 00000 n 
+0000021121 00000 n 
+0000021546 00000 n 
+0000034316 00000 n 
+0000034339 00000 n 
+0000045497 00000 n 
+
+trailer <<
+              /Info     2 0 R
+              /Root     1 0 R
+              /Size     24
+        >>
+startxref
+45520
+%%EOF

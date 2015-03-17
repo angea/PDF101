@@ -1,0 +1,215 @@
+%PDF-1.5
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Manually coded PDF file, authored by <ange.albertini@gmail.com> & <kurt.pfeifle@mykolab.com>    %
+%                                                                                                 %
+% Copyright (c) 2015 <ange.albertini@gmail.com> & <kurt.pfeifle@mykolab.com>                      %
+%                                                                                                 %
+% License: Creative Commons "CC-BY-NC-SA" v4.0, http://creativecommons.org/licenses/by-nc-sa/4.0/ %
+%            -- please leave above lines un-changed! --                                           %
+%                                                                                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                                                 %
+% File Features:                                                                                  %
+%                * a one-page PDF, DIN-A5-sized in landscape, containing a few text strings       %
+%                * fonts used: Helvetica and Helvetica-Bold, but fonts are not embedded           %
+%                * text should be selectable and copy'n'paste-able without a problem              %
+%                * file does not have a "binary" marker in the second line                        %
+%                                                                                                 %
+% Suggested Exercises:                                                                            %
+%                * Find the lines in this PDF file where the text definition happens              %
+%                * Change the color of all the text to red                                        %
+%                * Change the color of the "Hello, World" to blue, and of item 2 to magenta       %
+%                * Can you change the color of item 2 to white? Is it still selectable?           %
+%                * How do you change the font size of the different text elements?                %
+%                * Can you change the item texts to use bold too?                                 %
+%                * Can you change the page size to A4 landscape?                                  %
+%                * Can you change the page rotation?                                              %
+%                                                                                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+1 0 obj
+<<
+  /Type             /Catalog
+  /Pages            5 0 R
+>>
+endobj
+
+2 0 obj
+<<
+  /Author           (<kurt.pfeifle@mykolab.com>, <ange.albertini@gmail.com>)                      %
+  /CreationDate     (D:20150201000000+01'00')                                                     %
+  /Creator          (Ange Albertini \(@angealbertini\) and Kurt Pfeifle \(@pdfkungfoo\))          %
+  /CustomKey1       (Dummy entry number 1)                                                        %
+  /CustomKey2       (Dummy entry number 2)                                                        %
+  /Keywords         (PDF with text, without embedded fonts)                                       %
+  /ModDate          (D:20150102000000+01'00')                                                     %
+  /Producer         (Text editor + PDF specification + brainz + some file format experience)      %
+  /Subject          (Teaching PDF syntax with "living" examples)                                  %
+  /Title            (Hand-written PDF file with text-only content, without font embedding)        %
+>>
+endobj
+
+
+3 0 obj
+% empty object
+endobj
+
+4 0 obj
+% empty object
+endobj
+
+5 0 obj
+<<
+  /Type             /Pages
+  /Count            1
+  /Kids             [ 6 0 R ]
+>>
+endobj
+
+6 0 obj
+<<
+  /Type             /Page
+  /Contents         7 0 R
+  /MediaBox         [ 0 0 595 421 ]
+  /Parent           5 0 R
+  /Resources        <<
+                        /Font       10 0 R
+                        /ProcSet    [ /PDF /Text ]
+                    >>
+  /Rotate           0
+>>
+endobj
+
+7 0 obj
+<<
+  /Length           8 0 R
+>>
+stream
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Page content / Text drawing operations                                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                                                                     %
+%    If you are familiar with PostScript, you will discover a few similarities.                                       %
+%                                                                                                                     %
+%      * PDF "operators" are preceeded by their "operands".                                                           %
+%      * Some PDF operators do have exact matches in PostScript counterparts.                                         %
+%      * Some PDF operators don't have a PS counterparts (reflect some improvement)                                   %
+%      * PDF uses the same basic graphics model as PostScript (albeit it is extended)                                 %
+%      * PDF operators use shorter names                                                                              %
+%                                                                                                                     %
+%    The following lines provide comments to explain what happens in the PDF code.                                    %
+%                                                                                                                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  0.1 0 0 0.1 0 0         cm     % 'cm' maps to PostScript's 'concat' operator.                                       %
+                                 %      It concatenates the matrix given to the current transformation matrix.        %
+  0                       g      % 'g'  maps to PostScript's 'setgray' operator.                                      %
+                                 %      It sets the gray level for nonstroking operations.                            %
+                          q      % 'q'  maps to 'gsave'                                                               %
+                                 %      It saves the current graphics state.                                          %
+  10 0 0 10 0 0 cm        BT     % 'BT' has no PS counterpart.                                                        %
+                                 %      It marks the beginning of text.                                               %
+  /F1 36                  Tf     % 'Tf' maps to 'selectfont'.                                                         %
+                                 %      It sets the text font and size.                                               %
+  0   0   0               rg     % 'rg' maps to 'setrgbcolor'.                                                        %
+                                 %      It sets the RGB color value for nonstroking operations.                       %
+  1   0   0   1  36  360  Tm     % 'Tm' has no PS counterpart.                                                        %
+                                 %      It sets the text matrix and the text line matrix.                             %
+  (Hello, World!)         Tj     % 'Tj' maps to 'show'.                                                               %
+                                 %      It triggers the showing of text.                                              %
+  /F2 24                  Tf     % ==== see above ====                                                                %
+  4 -40                   Td     % 'Td' has no PS counterpart.                                                        %
+                                 %      It moves the text position to the give coordinates.                           %
+  (* item 1)              Tj     % ==== see above ====                                                                %
+  40                      TL     % 'TL' has no PS counterpart.                                                        %
+                                 %      It marks the beginning of text.                                               %
+  0   0   0               rg     % ==== see above ====                                                                %
+  (* item 2)              '      % '    has no PS counterpart.                                                        %
+                                 %      It moves to beginning of next line und shows the last text.                   %
+  0   1   1               rg     % ==== see above ====                                                                %
+                                                                                                                      %
+                                                                                                                      %
+                                                                                                                      %
+  0.1                     w                                     % COMMENTED OUT... ("Set line width")                 %
+% 0                       Tr                                    % COMMENTED OUT... ("Text Rendering Mode")            %
+% <48656c6c6f2c20576f726c64212028696e2048455829>'               % COMMENTED OUT...                                    %
+                                                                % What happens if you comment it IN ??                %
+                                                                % Where do you change the color of the new text?      %
+                                                                % What happens if you use '1 Tr', '2 Tr' or '3 Tr'?   %
+                                                                % What about '4 Tr', '5 Tr', '6 Tr' and '7 Tr' ?      %
+                                                                % Also play with variants of '0.1 w'...               %
+                                                                                                                      %
+                                 % Read up details of 'Tr' operator on page 254 of the PDF-1.7 spec (Adobe Edition)   %
+                                 % URL here:                                                                          %
+                                 % www.adobe.com/content/dam/Adobe/en/devnet/acrobat/pdfs/PDF32000_2008.pdf#?page=254 %
+                                                                                                                      %
+                                                                                                                      %
+                          ET     % 'ET' has no PS counterpart.                                                        %
+                                 %      It marks the end of text.                                                     %
+                          Q      % 'Q'  maps to 'grestore'.                                                           %
+                                 %      It restores the (last saved) graphics state.                                  %
+                                                                                                                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+endstream
+endobj
+
+8 0 obj
+7680
+endobj
+
+9 0 obj
+% empty object
+endobj
+
+10 0 obj
+<<
+  /F1           12 0 R
+  /F2           13 0 R
+>>
+endobj
+
+11 0 obj
+% empty object
+endobj
+
+12 0 obj
+<<
+  /Type         /Font
+  /Subtype      /Type1
+  /BaseFont     /Helvetica-Bold
+>>
+endobj
+
+13 0 obj
+<<
+  /Type         /Font
+  /Subtype      /Type1
+  /BaseFont     /Helvetica
+>>
+endobj
+
+xref
+0 14
+0000000000 65535 f 
+0000002711 00000 n 
+0000002788 00000 n 
+0000003811 00000 n 
+0000003842 00000 n 
+0000003873 00000 n 
+0000003974 00000 n 
+0000004272 00000 n 
+0000012017 00000 n 
+0000012038 00000 n 
+0000012069 00000 n 
+0000012138 00000 n 
+0000012170 00000 n 
+0000012270 00000 n 
+
+trailer <<
+            /Info   2 0 R
+            /Root   1 0 R
+            /Size   14
+        >>
+startxref
+12365
+%%EOF

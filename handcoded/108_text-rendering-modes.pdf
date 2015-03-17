@@ -1,0 +1,127 @@
+%PDF-1.1
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                                                        %
+% Hand-coded PDF source code file for self-studying the effects of PDF operators.                        %
+% Purpose: learn about the transformation matrix operator `cm`.                                          %
+%                                                                                                        %
+% (c) Copyright 2015, <kurt.pfeifle@mykolab.com>                                                         %
+% License "CC-BY-NC-SA v4.0" http://creativecommons.org/licenses/by-nc-sa/4.0/                           %
+%                                                                                                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                                                        %
+%  File features:                                                                                        %
+%  ==============                                                                                        %
+%                                                                                                        %
+%     - 1 page PDF showing text                                                                          %
+%     - text is rendered in different "text rendering modes"                                             %
+%     - code can easily edited by commenting in/out without influencing the `xref` table's validity      %
+%                                                                                                        %
+%                                                                                                        %
+%  Suggested excercises:                                                                                 %
+%  =====================                                                                                 %
+%                                                                                                        %
+%     - What do you need to change in order to make the PDF page a standard "A4" size?                   %
+%     - What happens if you change the PDF page size to a standard "Letter" size?                        %
+%     - How do you make the text color "white"?                                                          %
+%     - Can you still somehow discover white text if the PDF is rendered in the viewer?                  %
+%     - Can you extract the text from the PDF using the `pdftotext` utility?                             %
+%                                                                                                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+1 0 obj
+<</Kids[2 0 R]/Count 1/Type/Pages>>
+endobj
+
+2 0 obj
+<</Parent 1 0 R/Resources 3 0 R/MediaBox[0 0 940 100]/Contents[4 0 R]/Type/Page>>
+endobj
+
+3 0 obj
+<</Font<</F1<</Type/Font/Subtype/Type1/BaseFont/Courier  >> >> >>
+endobj
+
+4 0 obj
+<</Length 6922>>
+stream
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     It's allowed to "play" with the following lines  :-)     %
+%        Comment in one line at a time (per section) --        %
+%        -- comment out all other lines!                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                                                                                                  %
+  0.05 w                                  % set line width to 0.05 pt                                                             %
+% 0.1  w                                  % set line width to 0.1 pt                                                              %
+% 0.2  w                                  % set line width to 0.2 pt                                                              %
+% 0.5  w                                  % set line width to 0.5 pt                                                              %
+% 1.0  w                                  % set line width to 1.0 pt (default value if not explicitly set)                        %
+% 2.0  w                                  % set line width to 2.0 pt                                                              %
+                                                                                                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                                                                                                  %
+%    7 Tr                                 % set text rendering mode to 7 (add text to path to clipping)                           %
+%    6 Tr                                 % set text rendering mode to 6 (fill first, then stroke text and add path to clipping)  %
+%    5 Tr                                 % set text rendering mode to 5 (stroke text and add path to clipping)                   %
+%    4 Tr                                 % set text rendering mode to 4 (fill text and add path to clipping)                     %
+%    3 Tr                                 % set text rendering mode to 3 (neither fill, nor stroke text -- invisible!)            %
+     2 Tr                                 % set text rendering mode to 2 (fill first, then stroke text)                           %
+%    1 Tr                                 % set text rendering mode to 1 (stroke text)                                            %
+%    0 Tr                                 % set text rendering mode to 0 (fill text)                                              %
+                                                                                                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Free space for your own code...                                                                                                 %
+                                                                                                                                  %
+                                                                                                                                  %
+                                                                                                                                  %
+                                                                                                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                                                                                                  %
+q                                         % Save current graphics state                                                           %
+%  2                          w           % Set linewidth (for stroking operations) to 2 points                                   %
+   0.75                       g           % Set Gray level for non-stroking operations to "0.7"                                   %
+%  0.3                        G           % Set Gray level for stroking operations to "0.3"                                       %
+   1  0  0                    RG          % Set RGB color to "1 0 0" for stroking operations (red)                                %
+   5   5   930  90            re          % Append rectangle to path                                                              %
+                              f           % Fill path using "non-zero winding number rule"                                        %
+   5   5   930  90            re          % Append rectangle to path                                                              %
+                              S           % Stroke path                                                                           %
+Q                                         % Restore previously saved graphics state                                               %
+                                                                                                                                  %
+q                                         % Save current graphics state                                                           %
+   1   0   0   1   20    16   cm          % Concatenate matrix "1 0 0 1 50 700" to transformation matrix                          %
+   1   1   0                  rg          % Set RGB color to "1 1 0" for non-stroking operations (yellow)                         %
+   1   0   0                  RG          % Set RGB color to "1 0 0" for stroking operations (red)                                %
+BT                                        % Begin text object                                                                     %
+  /F1 96                      Tf          % Set font size to 96 points and font to `/F1` (defined in obj 3 as "Courier")          %
+  (Hello, TROOPERS!)          Tj          % Show text                                                                             %
+ET                                        % End text object                                                                       %
+Q                                         % Restore previously saved graphics state                                               %
+                                                                                                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+endstream
+endobj
+
+5 0 obj
+<</Pages 1 0 R/Type/Catalog>>
+endobj
+
+xref
+0 6
+0000000000 65535 f 
+0000003116 00000 n 
+0000003168 00000 n 
+0000003266 00000 n 
+0000003348 00000 n 
+0000010325 00000 n 
+
+trailer
+<</Root 5 0 R/Size 6>>
+startxref
+10371
+%%EOF

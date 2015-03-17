@@ -1,0 +1,72 @@
+%PDF-1.1
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                                                        %
+% Hand-coded PDF source code file for self-studying the effects of PDF operators.                        %
+% Purpose: learn about the transformation matrix operator `cm`.                                          %
+%                                                                                                        %
+% (c) Copyright 2015, <kurt.pfeifle@mykolab.com>                                                         %
+% License "CC-BY-NC-SA v4.0" http://creativecommons.org/licenses/by-nc-sa/4.0/                           %
+%                                                                                                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+1 0 obj
+<</Kids[2 0 R]/Count 1/Type/Pages>>
+endobj
+
+2 0 obj
+<</Parent 1 0 R/Resources 3 0 R/MediaBox[0 0 595 842]/Contents[4 0 R]/Type/Page>>
+endobj
+
+3 0 obj
+<</Font<</F1<</Type/Font/Subtype/Type1/BaseFont/Times-Italic>> >> >>
+endobj
+
+4 0 obj
+<</Length  1087>>
+stream
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% It's allowed to "play" with the following lines  :-)  %
+%      Comment in one line at a time ---                %
+%   -- comment out all other lines!                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    1    0    0    1    60    230    cm                 %
+%   1    0    0    1    60    430    cm                 %
+%   1    0    0    1   160    430    cm                 %
+%   1    0    0   -1   160    428    cm                 %
+%  -1    0    0    1   533    430    cm                 %
+%   1    0    0   -1   160    430    cm                 %
+%   1    0    1    1   160    430    cm                 %
+%   1    0   -1    1   160    430    cm                 %
+%   1    1    0    1   160    430    cm                 %
+%   1   -1    0    1   160    430    cm                 %
+%   1   -1    2    1   160    430    cm                 %
+%   1    2   -2    1   160    430    cm                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+BT
+  /F1 48 Tf
+  (Hello, TROOPERS!)Tj
+ET
+endstream
+endobj
+
+5 0 obj
+<</Pages 1 0 R/Type/Catalog>>
+endobj
+
+xref
+0 6
+0000000000 65535 f 
+0000000974 00000 n 
+0000001026 00000 n 
+0000001124 00000 n 
+0000001209 00000 n 
+0000002347 00000 n 
+trailer
+
+<</Root 5 0 R/Size 6>>
+startxref
+2393
+%%EOF

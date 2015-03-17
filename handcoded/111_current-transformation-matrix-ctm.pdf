@@ -1,0 +1,359 @@
+%PDF-1.3
+%¿÷¢þ
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                                                         %
+% Hand-coded PDF source code file for self-studying the effects of PDF operators.                         %
+%                                                                                                         %
+% Purpose of this file: Learn about the transformation matrix (CTM) operator `cm`.                        %
+%         * The CTM manipulates the coordinate system of the user space canvas.                           %
+%         * This allows for rotating, shifting, scaling and skewing graphical page objects.               %
+%                                                                                                         %
+% (c) Copyright 2015, <kurt.pfeifle@mykolab.com>                                                          %
+% License "CC-BY-NC-SA v4.0" http://creativecommons.org/licenses/by-nc-sa/4.0/                            %
+%                                                                                                         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                                                         %
+%  File features:                                                                                         %
+%  ==============                                                                                         %
+%                                                                                                         %
+%     - 1 page PDF a 2x2 pixel color image in different locations, scales, rotations and skews            %
+%     - image data stream is only 12 bytes                                                                %
+%     - code can be easily edited by commenting in/out without influencing the `xref` table's validity    %
+%                                                                                                         %
+%                                                                                                         %
+%  Suggested excercises:                                                                                  %
+%  =====================                                                                                  %
+%                                                                                                         %
+%     - What do you need to change in order to make the PDF page a standard "A4" size?                    %
+%     - How does this page render in different PDF viewers? (Try also Chrome's native PDF render as well  %
+%       as Firefox with PDF.js, MuPDF, Ghostscript, OSX Preview.app, Acrobat(Reader)...)                  %
+%     - Comment out lines with the `/XOb0 Do` code to see which image comes from which code block         %
+%     - Does this file help you to understand the logic of the `cm` operator?                             %
+%                                                                                                         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                                                         %
+% Recommendations:                                                                                        %
+% ================                                                                                        %
+%                                                                                                         %
+% The most common transformations effected by the `cm` operator are translations, rotations and scaling.  %
+% The order of execution is significant: translate+rotate gives a different result from rotate+translate. %
+% It is recommended to use the following order for easier predictability of results:                      %
+%                                                                                                         %
+%   1. Translation                                                                                        %
+%   2. Rotation                                                                                           %
+%   3. Scaling                                                                                            %
+%   4. Skewing                                                                                            %
+%                                                                                                         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                                                               %
+% Background info about `cm` and CTM:                                                                           %
+% ===================================                                                                           %
+%                                                                                                               %
+% The CTM is a 3x3 matrix:    a  b  0                                                                           %
+%                             c  d  0                                                                           %
+%                             e  f  1                                                                           %
+%                                                                                                               %
+% Because the 3rd column is always "0 0 1" the PDF syntax takes the simplified approach of noting the CTM as an %
+% array of 6 elements:  [a b c d e f].                                                                          %
+%                                                                                                               %
+% The `cm` operator concatenates the given matrix to the CTM (current transformation matrix). This means: it    %
+% performs a mathematical matrix multiplication.                                                                %
+%                                                                                                               %
+% The resulting transformation matrix defines the method to compute the coordinates of the current user space   %
+% (where the drawing commands are described) back to the original space (where the PDF viewer has to draw the   %
+% pixels). If  x'  and y'  are to be the coordinates of the untransformed system, and  x  and  y  the ones for  %
+% the transformed one, the equations are:                                                                       %
+%                                                                                                               %
+%     x'  =  a * x  +  c * y  + e                                                                               %
+%     y'  =  b * x  +  d * y  + f                                                                               %
+%                                                                                                               %
+% The matrix represented by  [1 1 0 0 0 0]  does not change the coordinates ("unit" matrix). The final result   %
+% of different consecutive transformations can be expressed by a single operation which is represented by a     %
+% matrix that results from the matrix-multiplication of the individual matrices. (Matrix multiplication isn't   %
+% commutativ -- just as coordination transformations cannot be swapped for identical results.) When a new       %
+% coordination tranformation happens, the 'concatenation' (=multiplication) of the new matrix must be multi-    %
+% plied *before* (that is: *pre-multiplied*!) the existing matrix.                                              %
+%                                                                                                               %
+%                                                                                                               %
+% Cheat sheet notes about `cm`:                                                                                 %
+% =============================                                                                                 %
+%                                                                                                               %
+% Translate an object:      1      0       0      1      X     Y   cm    % X in direction of x-axis, Y for y-ax.%
+% Translate an object:      1      0       0      1    222   333   cm    % 222 units in x-, 333 in y-direction  %
+%                                                                                                               %
+% Rotate an object:      cosX   sinX   -sinX   cosX      0     0   cm    % where "X" is the angle of rotation   %
+% Rotate an object:     0.966  0.259  -0.259  0.966      0     0   cm    % values for X=15Â°                     %
+%                                                                                                               %
+% Scale an object:          X      0       0      Y      0     0   cm    % X in x-axis, Y in y-axis direction   %
+% Scale an object:          2.2    0       0      0.9    0     0   cm    % 220% in x-, 90% in y-direction       %
+%                                                                                                               %
+% Skew an object:           1   tanX    tanY      1      0     0   cm    % X for x-axis, Y for y-axis           %
+% Skew an object:           1  0.268   0.577      1      0     0   cm    % values for X=15Â°, Y=30Â°              %
+%                                                                                                               %
+% Mirror object (x-axis):   1      0       0     -1      0     0   cm    % Mirrors object along the x-axis      %
+% Mirror object (y-axis):  -1      0       0      1      0     0   cm    % Mirrors object along the y-axis      %
+%                                                                                                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+1 0 obj
+<<
+  /Pages            3 0 R
+  /Type             /Catalog
+>>
+endobj
+
+2 0 obj
+<<
+  /CreationDate     (D:20150223160000+01'00')
+  /ModDate          (D:20150223160000+01'00')
+  /Producer         (Brainz + Experience)
+  /Title            (PDF: How the `cm` operator works with the CMT)
+  /Subject          (The PDF "CTM" \(Current Transformation Matrix\) -- learning it with a readable+editable PDF demo file)
+  /Creator          (VIm, ISO 32000-1:2008 PDF-1.7 Spec, Trial'n'Error)
+  /Author           (<kurt.pfeifle@mykolab.com>)
+  /Keywords         (TROOPERS15, Lecture on PDF Syntax, hand-written PDF code)
+>>
+endobj
+
+3 0 obj
+<<
+  /Count            1
+  /Kids             [ 4 0 R ]
+  /Type             /Pages
+>>
+endobj
+
+4 0 obj
+<<
+  /Contents         7 0 R
+  /MediaBox         [ 0 0    800    600 ]
+  /Parent           3 0 R
+  /Resources        <<
+                        /ProcSet [
+                                    /PDF
+                                    /Text
+                                    /ImageB
+                                    /ImageC
+                                    /ImageI
+                                 ]
+                        /XObject <<
+                                    /XOb1   5 0 R
+                                 >>
+                    >>
+  /Type             /Page
+>>
+endobj
+
+5 0 obj
+<<
+  /BBox             [ 0 0 2 2 ]
+  /BitsPerComponent 8
+  /ColorSpace       /DeviceRGB
+  /Height           2
+  /Subtype          /Image
+  /Type             /XObject
+  /Width            2
+% /Filter           /ASCIIHexDecode    % Comment out if using binary stream data!
+% /Length           26                 % Valid for ASCIIHexEncoded stream data!
+  /Length           13                 % Valid for binary stream data!
+>>
+stream
+ÿ   €   ÿ   
+endstream
+endobj
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Alternatively, you can use one of the next lines as binary or as ASCIIHexEnconded stream.
+%%%%%% Insert it in place of the `ff00000080000000ff000000>` line above,
+%%%%%% or insert it in place of the `ÿ   €   ÿ   ` line above.
+%%%%%% The `/Filter /ASCIIHexDecode` and `/Length 26` lines in the object dictionary above need to be adapted!
+%ÿ   €   ÿ   
+%ff00000080000000ff000000>
+%%%%%% If you use one of the above line, don't forget to remove the comment characer too!
+%%%%%% Be careful to fix byte offsets after editing too, or better: keep all length values as they are.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+6 0 obj
+<<>>         % empty object
+endobj
+
+7 0 obj
+<<
+  /Length           8 0 R
+>>
+stream
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    1         0         0          1         X          Y         cm    % SCALE x-axis by X, y-axis by Y              %
+%    cos(A)    sin(A)   -sin(A)     cos(A)    0          0         cm    % ROTATE by angle of A                        %
+%    X         0         0          Y         0          0         cm    % SCALE x-axis by X, y-axis by Y              %
+%    1         tan(A)    tan(B)     1         0          0         cm    % SKEW x-axis by angle A, y-axis by angle B   %
+%    1         0         0         -1         0          0         cm    % MIRROR image (along x-axis)                 %
+%   -1         0         0          1         0          0         cm    % MIRROR image (along y-axis)                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                                                                                       %
+  q                                                                      %                                             %
+     1         0         0          1         10         10        cm    % TRANSLATE to 10,10                          %
+    40.0       0         0         40.0       0.0        0.0       cm    % SCALE by x=4000%, y=4000%                   %
+    /XOb1 Do                                                             %                                             %
+  Q                                                                      %                                             %
+                                                                                                                       %
+  q                                                                      %                                             %
+     1         0         0          1         51         51        cm    % TRANSLATE to 51,51                          %
+    30.0       0         0         50.0       0.0        0.0       cm    % SCALE by x=3000%, y=5000%                   %
+    /XOb1 Do                                                             %                                             %
+  Q                                                                      %                                             %
+                                                                                                                       %
+  q                                                                      %                                             %
+     1         0         0          1         82         21        cm    % TRANSLATE to 82,21                          %
+    51.0       0         0         29.0       0.0        0.0       cm    % SCALE by x=5100%, y=2900%                   %
+    /XOb1 Do                                                             %                                             %
+  Q                                                                      %                                             %
+                                                                                                                       %
+  q                                                                      %                                             %
+     1         0         0          1         82         102       cm    % TRANSLATE to 82,102                         %
+    40.0       0         0         40.0       0.0        0.0       cm    % SCALE by x=4000%, y=4000%                   %
+     0.96593   0.25881  -0.25881    0.96593   0.0        0.0       cm    % ROTATE by 15Â° (0.2617916655 radians)        %
+    /XOb1 Do                                                             %                                             %
+  Q                                                                      %                                             %
+                                                                                                                       %
+  q                                                                      %                                             %
+     1         0         0          1         134        51        cm    % TRANSLATE to 134,51                         %
+    40.0       0         0         40.0       0.0        0         cm    % SCALE by x=4000%, y=4000%                   %
+     0.86603  -0.49999   0.49999    0.86603   0.0        0         cm    % ROTATE by -30Â° (0.5235833310 radians)       %
+    /XOb1 Do                                                             %                                             %
+  Q                                                                      %                                             %
+                                                                                                                       %
+  q                                                                      %                                             %
+     1         0         0          1         10         202       cm    % TRANSLATE to 10,202                         %
+    40.0       0         0         40.0       0.0        0         cm    % SCALE by x=4000%, y=4000%                   %
+     1        -0.99995   0          1         0          0         cm    % SKEW x-axis by -45Â° (0.7853749965 radians)  %
+    /XOb1 Do                                                             %                                             %
+  Q                                                                      %                                             %
+                                                                                                                       %
+  q                                                                      %                                             %
+     1         0         0          1         51         202       cm    % TRANSLATE to 51,202                         %
+    40.0       0         0         40.0       0.0        0         cm    % SCALE by x=4000%, y=4000%                   %
+     1         0.99995   0          1         0          0         cm    % SKEW x-axis by +45Â° (0.7853749965 radians)  %
+    /XOb1 Do                                                             %                                             %
+  Q                                                                      %                                             %
+                                                                                                                       %
+  q                                                                      %                                             %
+     1         0         0          1         92         202       cm    % TRANSLATE to 92,202                         %
+    40.0       0         0         40.0       0.0        0         cm    % SCALE by x=4000%, y=4000%                   %
+     1         0         0.99995    1         0          0         cm    % SKEW y-axis by +45Â° (0.7853749965 radians)  %
+    /XOb1 Do                                                             %                                             %
+  Q                                                                      %                                             %
+                                                                                                                       %
+  q                                                                      %                                             %
+     1         0         0          1         250        250       cm    % TRANSLATE to 250,202                        %
+   200.0       0         0        200.0       0.0        0         cm    % SCALE by x=20000%, y=20000%                 %
+     1         0        -0.99995    1         0          0         cm    % SKEW y-axis by -45Â° (0.7853749965 radians)  %
+    /XOb1 Do                                                             %                                             %
+  Q                                                                      %                                             %
+                                                                                                                       %
+  q                                                                      %                                             %
+     1         0         0          1         400        350       cm    % TRANSLATE to 250,202                        %
+   200.0       0         0        200.0       0.0        0         cm    % SCALE by x=20000%, y=20000%                 %
+     0.86603  -0.49999   0.49999    0.86603   0.0        0         cm    % ROTATE by -30Â° (0.5235833310 radians)       %
+     1         0        -0.57733    1         0          0         cm    % SKEW y-axis by -30Â° (0.5235833310 radians)  %
+    /XOb1 Do                                                             %                                             %
+  Q                                                                      %                                             %
+                                                                                                                       %
+  q                                                                      %                                             %
+     1         0         0          1         240        10        cm    % TRANSLATE to 240,10                         %
+   320.0       0         0         40.0       0.0        0.0       cm    % SCALE by x=32000%, y=4000%                  %
+    /XOb1 Do                                                             %                                             %
+  Q                                                                      %                                             %
+                                                                                                                       %
+  q                                                                      %                                             %
+     1         0         0          1         750        10        cm    % TRANSLATE to 750,10                         %
+    40.0       0         0        320.0       0.0        0.0       cm    % SCALE by x=4000%, y=32000%                  %
+    /XOb1 Do                                                             %                                             %
+  Q                                                                      %                                             %
+                                                                                                                       %
+  q                                                                      %                                             %
+     1         0         0          1         560        101       cm    % TRANSLATE to 560,101                        %
+   320.0       0         0         40.0       0.0        0.0       cm    % SCALE by x=32000%, y=4000%                  %
+    -1         0         0         -1         0.0        0         cm    % ROTATE by 180Â° (3.14159 radians)            %
+    /XOb1 Do                                                             %                                             %
+  Q                                                                      %                                             %
+                                                                                                                       %
+  q                                                                      %                                             %
+     1         0         0          1         560.2      202       cm    % TRANSLATE to 560.2,202                      %
+   240.0       0         0         40.0       0.0        0.0       cm    % SCALE by x=24000%, y=4000%                  %
+     1         0         0         -1         0.0        0         cm    % MIRROR image (along x-axis)                 %
+    /XOb1 Do                                                             %                                             %
+  Q                                                                      %                                             %
+                                                                                                                       %
+  q                                                                      %                                             %
+     1         0         0          1         240        202       cm    % TRANSLATE to 240,202                        %
+   320.0       0         0         40.0       0.0        0.0       cm    % SCALE by x=32000%, y=4000%                  %
+     1         0         0         -1         0.0        0         cm    % MIRROR image (along x-axis)                 %
+    /XOb1 Do                                                             %                                             %
+  Q                                                                      %                                             %
+                                                                                                                       %
+  q                                                                      %                                             %
+     1         0         0          1         560        112       cm    % TRANSLATE to 560,112                        %
+   320.0       0         0         40.0       0.0        0.0       cm    % SCALE by x=32000%, y=4000%                  %
+    -1         0         0          1         0.0        0         cm    % MIRROR image (along y-axis)                 %
+    /XOb1 Do                                                             %                                             %
+  Q                                                                      %                                             %
+                                                                                                                       %
+  q                                                                      %                                             %
+     1         0         0          1         740        330       cm    % TRANSLATE to 740,330                        %
+    40.0       0         0        320.0       0.0        0.0       cm    % SCALE by x=4000%, y=32000%                  %
+    -1         0         0         -1         0.0        0         cm    % ROTATE by 180Â° (0.5235833310 radians)       %
+    /XOb1 Do                                                             %                                             %
+  Q                                                                      %                                             %
+                                                                                                                       %
+                                                                         %                                             %
+                                                                         %                                             %
+                                                                         %                                             %
+                                                                         %                                             %
+                                                                         %                                             %
+                                                                         %                                             %
+                                                                         %                                             %
+                                                                         %                                             %
+                                                                         %                                             %
+                                                                         %                                             %
+                                                                         %                                             %
+                                                                         %                                             %
+                                                                         %                                             %
+                                                                         %                                             %
+                                                                         %                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+endstream
+endobj
+
+8 0 obj
+16940
+endobj
+
+xref
+0 9
+0000000000 65535 f 
+0000010800 00000 n 
+0000010877 00000 n 
+0000011425 00000 n 
+0000011526 00000 n 
+0000012121 00000 n 
+0000013337 00000 n 
+0000013381 00000 n 
+0000030396 00000 n 
+
+trailer <<
+          /Info 2 0 R
+          /Root 1 0 R
+          /Size 9
+        >>
+startxref
+30418
+%%EOF
