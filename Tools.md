@@ -53,10 +53,11 @@ Most of them are available for all major OS platforms (Windows, OSX, Linux):
   This family of utilities can ...
 
 * **`peepdf`**.
-  This utility can ...
+  `peepdf.py` is a Python suite of toolto explore PDF files. It was initially created to help find out if a PDF contains harmful contents or not. It is however extremely useful beyond PDF malware research, because it helps to explore, study, investigate and understand PDF file structures in general.
+
 
 * **`pdfid.py`**.
-  This utility can 
+  This utility can ...
 
 * **`pdf-parser.py`**.
   This utility can ...
