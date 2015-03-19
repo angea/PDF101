@@ -49,7 +49,7 @@ Most of them are available for all major OS platforms (Windows, OSX, Linux):
   Not a PDF viewer, but a little toolbox with useful sub-commands:
   `clean` (re-writes PDF files), `extract` (extracts font and image resources), `show` (displays internal PDF objects), `poster` (splits large PDF pages into smaller tiles) and `info` (displays a PDF's metadata).
 
-* **`podofo*`**.
+* **`podofo{box,color,countpages,crop,encrypt,gc,img2pdf,imgextract,impose,incrementalupdates,merge,pages,pdfinfo,txt2pdf,txtextract,uncompress,xmp}`**
   This family of utilities can ...
 
 * **`peepdf`**.
@@ -167,10 +167,17 @@ These are beneficial also to "old timers" who are using them since many years al
 ## `mutool`
 
 
-## `podofo*`
+## `podofo{box,color,countpages,crop,encrypt,gc,img2pdf,imgextract,impose,incrementalupdates,merge,pages,pdfinfo,txt2pdf,txtextract,uncompress,xmp}`
 
 
 ## `peepdf`
+
+1. `peepdf` can be used to apply and unapply different `/Filter` settings to streams.
+    Supported *encoding* filters (for applying to an un-encoded stream) are: asciihex (alias: ahx), lzw, flatedecode (alias: fl).
+    Supported *decoding* filters (for decoding to an encoded stream) are: asciihex (alias: ahx), ascii85 (alias: a85), lzw, flatedecode (alias: fl), runlength (alias: rl), ccittfax (alias: ccf).
+
+1.  Not implemented filters (in either direction) are: jbig2 (`/JBIG2Decode`), dct (`/DCTDecode`), jpx (`/JPXDecode`).
+    There is a Google Summer of Code 2015 opportunity for a willing student to implement missing filters for PeepDF.
 
 
 ## `pdfid.py`
