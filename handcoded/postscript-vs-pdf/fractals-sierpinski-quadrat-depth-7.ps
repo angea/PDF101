@@ -1,0 +1,39 @@
+%!PS-Adobe-3.0
+%%Filename: fractals-sierpinski-quadrat-depth-7.ps
+%%Title: Sierpinski-Quadrat (<kurt.pfeifle@gmail.com>)
+%%BoundingBox: 0 0 580 580
+%%Page: 1 1
+
+%% to create a PDF run:
+%%     gs -o output.pdf -sDEVICE=pdfwrite -g5800x5800 fractals-sierpinski-quadrat-depth-7.ps
+
+/depth  7 def
+
+/sierpinski { dup 1
+                 ge {
+                     1  sub
+             gsave
+                     1  3 div dup scale
+                                    dup sierpinski
+                     1  0 translate dup sierpinski
+                     1  0 translate dup sierpinski
+                     0  1 translate dup sierpinski
+                     0  1 translate dup sierpinski
+                    -1  0 translate dup sierpinski
+                    -1  0 translate dup sierpinski
+                     0 -1 translate dup sierpinski
+             grestore
+                    }{
+                       newpath 0 0 moveto 1 0 lineto 1 1 lineto 0 1 lineto closepath fill
+                     }
+                      ifelse pop
+} def
+
+ 40  40 translate
+500 500 scale
+
+0.1 setlinewidth
+depth sierpinski
+
+showpage
+
