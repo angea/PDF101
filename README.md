@@ -15,6 +15,7 @@ This may cause that some viewers or Ghostscript complain that they cannot find a
 
 The initial creation of these files was inspired by [a talk held](https://www.troopers.de/events/troopers15/451_advanced_pdf_tricks_apt_-_a_workshop-style_presentation_to_understand_the_pdf_file_format_/) at the [TROOPERS15](https://www.troopers.de/) conference in Heidelberg [(Youtube video of talk)](https://www.youtube.com/watch?v=k9g9jZdjRcE).
 
+![Youtube video screenshot](http://i.stack.imgur.com/UCf6v.png)
 
 ## Text editor hints
 
