@@ -62,6 +62,6 @@ Before you play with these PDFs and modify them, create backups!
   Test also with `pdftotext` or with copy'n'pasting of text.
 
 * **`115_little-riddle.pdf`** :    
-  A littel riddle: Something is hidden in this PDF -- what is it?
+  A little riddle: Something is hidden in this PDF -- what is it?
   How did the hiding happen??
 

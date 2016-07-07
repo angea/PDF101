@@ -19,7 +19,7 @@ Most of them are available for all major OS platforms (Windows, OSX, Linux):
   It can also extract a copy of the attached files from the PDF.
 
 * **`pdfresurrect`**.
-  This utility reports if a PDF makes use of the offical feature that allows to make *"incremental updates"* of the document.
+  This utility reports if a PDF makes use of the official feature that allows to make *"incremental updates"* of the document.
   It can also restore previous versions of the file.
 
 * **`pdftk`**.
@@ -37,12 +37,12 @@ Most of them are available for all major OS platforms (Windows, OSX, Linux):
 * **`zathura`**.
   This utility is a very fast and lightweight PDF viewer.
   (Additional plugins extend it to a viewer for PostScript, DjVu and CB files.)
-  It has a very limited GUI; instead of mouse and menue buttons, it is to be controlled from the keyboard.
+  It has a very limited GUI; instead of mouse and menu buttons, it is to be controlled from the keyboard.
 
 * **`mupdf`**.
   This utility is another lightweight PDF viewer.
   (It can also display XPS files.)
-  It has a very limited GUI; instead of mouse and menue buttons, it is to be controlled from the keyboard.
+  It has a very limited GUI; instead of mouse and menu buttons, it is to be controlled from the keyboard.
 
 * **`mutool`**.
   This utility is a sibling to `mupdf`.
@@ -53,7 +53,7 @@ Most of them are available for all major OS platforms (Windows, OSX, Linux):
   This family of utilities can ...
 
 * **`peepdf`**.
-  `peepdf.py` is a Python suite of toolto explore PDF files. It was initially created to help find out if a PDF contains harmful contents or not. It is however extremely useful beyond PDF malware research, because it helps to explore, study, investigate and understand PDF file structures in general.
+  `peepdf.py` is a Python suite of tool to explore PDF files. It was initially created to help find out if a PDF contains harmful contents or not. It is however extremely useful beyond PDF malware research, because it helps to explore, study, investigate and understand PDF file structures in general.
 
 
 * **`pdfid.py`**.
@@ -74,7 +74,7 @@ These are beneficial also to "old timers" who are using them since many years al
 
         pdfinfo -meta the.pdf
 
-1. To see all page boxes (MediaBox, CropBox, TrimBox, ArtBox) used by the file (or what page boxes are implicitely used because they are undefined), use:
+1. To see all page boxes (MediaBox, CropBox, TrimBox, ArtBox) used by the file (or what page boxes are implicitly used because they are undefined), use:
 
         pdfinfo -box the.pdf
 
@@ -132,7 +132,7 @@ These are beneficial also to "old timers" who are using them since many years al
 
     **Note:** whatever substitute that tool reports for non-embedded fonts is not true for Acrobat or other PDF viewers.
    These may use a different font substitution method (Acrobat frequently generates a *MultipleMaster* font "on the fly" for use in place of a non-embedded one).
-   The tool's reported substitute font is only applicable for those programms which make use of the *FreeType* font engine.
+   The tool's reported substitute font is only applicable for those programs which make use of the *FreeType* font engine.
 
 ## `pdfresurrect`
 
