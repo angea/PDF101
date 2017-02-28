@@ -102,7 +102,7 @@ These are beneficial also to "old timers" who are using them since many years al
         pdfimages -list the.pdf
 
     This command will print a list of images which are used inside the PDF file with various additional info:
-   the page number where the image appears, the image dimensions, their compression ratio, the PDF object ID of the image, their color depth, the number of color componenents.
+   the page number where the image appears, the image dimensions, their compression ratio, the PDF object ID of the image, their color depth, the number of color components.
 
 1. One notable detail about the previous hint:
    since `pdfimages -list` returns the respective PDF object ID, it is worth to check if various images listed for the PDF use *identical* ID numbers!
@@ -195,7 +195,7 @@ These are beneficial also to "old timers" who are using them since many years al
     - It does not know how to handle *incremental updates* of PDFs.
       If you let `qpdf` transform a PDF file containing incrementally updated versions the output will reflect the last file version only.
 
-1. For me personally, qpdf` ist most useful when it comes to the following three tasks:
+1. For me personally, `qpdf` is most useful when it comes to the following three tasks:
 
     - Quick-check the PDFs internal structure by running:
 
