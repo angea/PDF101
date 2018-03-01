@@ -15,9 +15,9 @@
 1. Define a custom status line which returns useful info about the current cursor position.
    Here is a suggestion:
 
-       :statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v](%b)(%B)(%o)`**
+    **`:statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v](%b)(%B)(%o)`**
 
-   What these settings mean:
+    What these settings mean:
 
     ````
     %F     :   currently open file name (with full path)
@@ -35,7 +35,6 @@
     %B     :   HEX value of current character under cursor
     %o     :   file byte offset of cursor
     ````
-
 
    Now a quick look on the status line shows the current file byte offset, line position, HEX value of character,...
 
