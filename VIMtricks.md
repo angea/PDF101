@@ -15,9 +15,9 @@
 1. Define a custom status line which returns useful info about the current cursor position.
    Here is a suggestion:
 
-   **`:statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v](%b)(%B)(%o)`**
+       :statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v](%b)(%B)(%o)`**
 
-    What these settings mean:
+   What these settings mean:
 
     ````
     %F     :   currently open file name (with full path)
