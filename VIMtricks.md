@@ -15,22 +15,22 @@
 1. Define a custom status line which returns useful info about the current cursor position.
    Here is a suggestion:
 
-        :statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v](%b)(%B)(%o)
+    **`:statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v](%b)(%B)(%o)`**
 
-       - **`%F`** : currently open file name (with full path)
-       - **`%m`** : modified flag (*`[+]`* if modified)
-       - **`%r`** : readonly flag (*`[RO]`* if readonly)
-       - **`%h`** : helpfile flag (*`[help]`* if helpfile -- maybe localized as *`[Hilfe]`*)
-       - **`%w`** : preview window flag (*`[Preview]`* if applicable)
-       - **`%L`** : total lines
-       - **`%{&ff}`** : file format (unix, dos,...)
-       - **`%y`** : file type as automatically recognized or manually set
-       - **`%p%%`** : relative position of cursor within file in percent
-       - **`%06l`** : current line position (column) of cursor, left padded with zeroes
-       - **`%06v`** : current line/row number of cursor, left padded with zeroes
-       - **`%b`** : ASCII value of the current character under cursor
-       - **`%B`** : HEX value of current character under cursor
-       - **`%o`** : file byte offset of cursor
+   - **`%F`** : currently open file name (with full path)
+   - **`%m`** : modified flag (*`[+]`* if modified)
+   - **`%r`** : readonly flag (*`[RO]`* if readonly)
+   - **`%h`** : helpfile flag (*`[help]`* if helpfile -- maybe localized as *`[Hilfe]`*)
+   - **`%w`** : preview window flag (*`[Preview]`* if applicable)
+   - **`%L`** : total lines
+   - **`%{&ff}`** : file format (unix, dos,...)
+   - **`%y`** : file type as automatically recognized or manually set
+   - **`%p%%`** : relative position of cursor within file in percent
+   - **`%06l`** : current line position (column) of cursor, left padded with zeroes
+   - **`%06v`** : current line/row number of cursor, left padded with zeroes
+   - **`%b`** : ASCII value of the current character under cursor
+   - **`%B`** : HEX value of current character under cursor
+   - **`%o`** : file byte offset of cursor
 
     Now a quick look on the status line shows the current file byte offset, line position, HEX value of character,...
 
